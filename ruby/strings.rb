@@ -33,5 +33,10 @@ puts lang
 
 multi_line.lines do |line|
   line.sub! 's', 'S'
-  puts line
+  puts "#{line.capitalize}"
 end
+
+p 'Ruby'.include? 'Ru'
+p 'Ruby'.include? 'bu'
+p 'Ruby'.include? ?y
+p 'Ruby'.include? ?r
