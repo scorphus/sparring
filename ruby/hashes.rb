@@ -22,10 +22,10 @@ best_book_ever.each_pair { |key, val| puts "#{key}: #{val}" }
 p best_book_ever['price']
 
 letter_count = Hash.new(0)  # 0 here is the default
-best_book_ever['long_title'].chars.map do |letter|
+best_book_ever['long_title'].chars.each do |letter|
   letter_count[letter] += 1
 end
-('a'..'z').map { |letter| puts "#{letter}: #{letter_count[letter]}" }
+('a'..'z').each { |letter| puts "#{letter}: #{letter_count[letter]}" }
 
 blood_meridian_characters = {
   protagnist: 'The Kid',
