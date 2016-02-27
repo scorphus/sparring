@@ -84,3 +84,33 @@ book.title = 'Blood Meridian, or the Evening Redness in the West'
 book.rating = 4.99
 book.rating = 10
 puts book.get_info
+
+
+class BetterYetBook
+
+  attr_accessor :title, :author, :pages
+  attr_reader :rating
+
+  def initialize (title, author, pages, rating=nil)
+    @title = title
+    @author = author
+    @pages = pages
+    self.rating = rating  # self.rating is created by attr_reader above ;-)
+  end
+
+  def rating=(rating)
+    rating ||= 0
+    @rating = rating unless rating > 5
+  end
+
+  def get_info
+    @state = 'searched'
+    "#{@title} by #{@author}, #{@pages} pages#{@rating > 0 ? ", #{@rating} stars" : ''}"
+  end
+
+end
+
+book = BetterYetBook.new('Blood Meridian', 'Cormac McCarthy', 337)
+puts book.get_info
+book.rating = 4.98
+puts book.get_info
