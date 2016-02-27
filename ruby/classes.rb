@@ -142,3 +142,25 @@ puts Multiplier.double 3
 puts Multiplier.triple 4
 puts Multiplier.call_count
 puts Multiplier.call_count
+
+
+class Dog
+  def to_s
+    'Dog'
+  end
+  def bark
+    'barks'
+  end
+end
+
+class SmallDog < Dog
+  def bark
+    'barks higher'
+  end
+end
+
+dog = Dog.new
+doggy = SmallDog.new
+
+puts "#{dog} \#1 #{dog.bark}"
+puts "#{doggy} \#2 #{doggy.bark}"
