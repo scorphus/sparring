@@ -114,3 +114,31 @@ book = BetterYetBook.new('Blood Meridian', 'Cormac McCarthy', 337)
 puts book.get_info
 book.rating = 4.98
 puts book.get_info
+
+
+class Multiplier
+
+  class << self
+    def call_count
+      @@call_count ||= 0
+      @@call_count += 1
+    end
+  end
+
+  def self.double(x)
+    call_count
+    x * 2
+  end
+
+end
+
+def Multiplier.triple(x)
+  call_count
+  x * 3
+end
+
+puts Multiplier.double(2)
+puts Multiplier.double 3
+puts Multiplier.triple 4
+puts Multiplier.call_count
+puts Multiplier.call_count
