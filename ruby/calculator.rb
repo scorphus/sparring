@@ -20,4 +20,8 @@ class Calculator
     a / b
   end
 
+  def pi
+    52163.0/16604.0
+  end
+
 end

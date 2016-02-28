@@ -24,4 +24,9 @@ describe Calculator do
     expect{@calc.divide(3, 0)}.to raise_error(ZeroDivisionError)
   end
 
+  it 'should calculate Pi' do
+    expect(@calc.pi).to be_within(0.000002).of(3.141592)
+    puts @calc.pi
+  end
+
 end
