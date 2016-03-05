@@ -6,4 +6,9 @@ class GreeterController < ApplicationController
     @time = Time.now
   end
 
+  def takesome
+    curses = ['Fuck you', 'Eat shit', 'Fuck off', 'Go to hell']
+    @curse = curses.sample
+  end
+
 end
