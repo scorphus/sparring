@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'recipes/index'
+
   get 'courses/index'
 
   get 'greeter/heythere'

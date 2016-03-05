@@ -1,0 +1,17 @@
+<h1>Recipes</h1>
+
+<p>Searching for <strong> <%= @search_term %> </strong></p>
+
+<table>
+    <tr>
+    <% @recipes.each_with_index do |recipe,i| %>
+        <td>
+            <%= image_tag(recipe['image_url']) %>
+            <p><strong><%= recipe['title'] %></strong></p>
+        </td>
+        <% if i % 4 == 3 %>
+            </tr><tr>
+        <% end %>
+    <% end %>
+    </tr>
+</table>
