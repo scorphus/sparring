@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'courses/index'
+
   get 'greeter/heythere'
   get 'greeter/takesome'
 

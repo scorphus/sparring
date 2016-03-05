@@ -1,0 +1,19 @@
+// Place all the styles related to the courses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 6px;
+}
+
+.even, .odd {
+    vertical-align: top;
+}
+
+.even {
+    background-color: #EEE;
+}
