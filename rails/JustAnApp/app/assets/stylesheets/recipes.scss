@@ -2,19 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+img, td {
+    border-radius: 8px;
+    height: auto;
+    max-width: 280px;
+    width: auto;
+}
+
 img {
     display: block;
-    max-height:175px;
-    width: auto;
-    height: auto;
+    margin: 0 auto;
+    max-height: 175px;
+    text-align: center;
 }
 
 td {
-    padding: 5px;
-    margin: 5px;
-    display: inline-block;
-    border-radius: 5px;
-    vertical-align: top;
-    text-align: center;
     background-color: #EEE;
+    color: #6E6E6E;
+    display: inline-block;
+    font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-style: italic;
+    line-height: 1;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
 }
