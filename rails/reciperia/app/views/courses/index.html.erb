@@ -2,14 +2,18 @@
 
 <p>Searching for <strong> <%= @search_term %> </strong></p>
 
-<table>
-    <% @courses.each do |course| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= image_tag(course['smallIcon']) %></td>
-            <td>
-                <p><strong><%= course['name'] %></strong></p>
-                <%= course['shortDescription'] %>
-            </td>
-        </tr>
-    <% end %>
-</table>
+<% if @courses.nil? %>
+    No courses found.
+<% else %>
+    <table class="courses">
+        <% @courses.each do |course| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+                <td><%= image_tag(course['smallIcon']) %></td>
+                <td>
+                    <p><strong><%= course['name'] %></strong></p>
+                    <%= course['shortDescription'] %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
