@@ -2,7 +2,7 @@
 
 <p>Searching for <strong> <%= @search_term %> </strong></p>
 
-<table>
+<table class="recipes">
     <% @recipes.each_slice(4) do |recipes| %>
         <tr><% recipes.each do |recipe| %>
             <td align="center">

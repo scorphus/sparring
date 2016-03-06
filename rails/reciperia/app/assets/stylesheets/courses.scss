@@ -6,14 +6,11 @@ table {
     border-collapse: collapse;
 }
 
-td {
+.courses td {
     padding: 6px;
-}
-
-.even, .odd {
     vertical-align: top;
 }
 
-.even {
-    background-color: #EEE;
+.odd td {
+    background-color: #EFEFEF;
 }

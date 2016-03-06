@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-img, td {
+img, .recipes td {
     border-radius: 8px;
     height: auto;
     max-width: 280px;
@@ -17,14 +17,17 @@ img {
 }
 
 td {
-    background-color: #EEE;
     color: #6E6E6E;
-    display: inline-block;
     font-family: Palatino Linotype, Book Antiqua, Palatino, serif;
     font-style: italic;
     line-height: 1;
     margin: 5px;
     padding: 5px;
-    text-align: center;
     vertical-align: top;
+}
+
+.recipes td {
+    background-color: #EEE;
+    display: inline-block;
+    text-align: center;
 }
