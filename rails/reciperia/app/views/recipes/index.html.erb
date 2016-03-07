@@ -9,10 +9,10 @@
                 <%= link_to(image_tag(
                         recipe['image_url'],
                         alt: 'Picture',
-                        title: recipe['title'],
+                        title: raw(recipe['title']),
                     ), recipe['f2f_url']) %>
                 <br />
-                <strong><%= recipe['title'] %></strong>
+                <strong><%= raw(recipe['title']) %></strong>
             </td>
         <% end %></tr>
     <% end %>
