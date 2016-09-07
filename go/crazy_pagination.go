@@ -10,6 +10,14 @@ import (
 
 const perPage int = 30
 
+var maxPosts int = 100
+
+func init() {
+	if maxPostsEnv, err := strconv.Atoi(os.Getenv("MAXPOSTS")); err == nil {
+		maxPosts = maxPostsEnv
+	}
+}
+
 type createPostFunc func(int) []string
 
 func memoize(f createPostFunc) createPostFunc {
@@ -41,7 +49,7 @@ func createPosts(page int) []string {
 	posts := make([]string, 0)
 	for i := 0; i < perPage; i++ {
 		n := (page-1)*perPage + i + 1
-		if n > 100 {
+		if n > maxPosts {
 			break
 		}
 		fuck := fmt.Sprintf("Posts%03d", n)
