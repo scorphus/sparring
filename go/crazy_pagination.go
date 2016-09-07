@@ -10,6 +10,19 @@ import (
 
 const perPage int = 30
 
+type createPostFunc func(int) []string
+
+func memoize(f createPostFunc) createPostFunc {
+	cache := make(map[int][]string)
+	return func(page int) []string {
+		if posts, ok := cache[page]; ok {
+			return posts
+		}
+		cache[page] = f(page)
+		return cache[page]
+	}
+}
+
 func calcRealPage(cutRange, page int) int {
 	maxPos := cutRange + page + 2
 	return int(math.Ceil(float64(maxPos) / float64(perPage)))
@@ -38,9 +51,10 @@ func createPosts(page int) []string {
 }
 
 func genPages(cutRange, pageStart, pageEnd int) {
+	createPostsCache := memoize(createPosts)
 	for page := pageStart; page <= pageEnd; page++ {
 		realPage := calcRealPage(cutRange, page)
-		posts := createPosts(realPage)
+		posts := createPostsCache(realPage)
 		start, end := calcRange(cutRange, page)
 		if end > len(posts) {
 			fmt.Printf("Page %02d: []\n", page)
