@@ -52,7 +52,7 @@ func createPosts(page int) []string {
 		if n > maxPosts {
 			break
 		}
-		fuck := fmt.Sprintf("Posts%03d", n)
+		fuck := fmt.Sprintf("Post %03d", n)
 		posts = append(posts, fuck)
 	}
 	return posts
