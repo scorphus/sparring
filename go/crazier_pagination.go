@@ -65,8 +65,10 @@ func genPages(cutRange, pageStart, pageEnd int) {
 		posts := createPostsCache(realPage)
 		start, end := calcRange(cutRange, page)
 		fmt.Printf("[%02d:%02d] - ", start, end)
-		if end > len(posts) {
+		if start > len(posts) {
 			fmt.Printf("Page %02d: []\n", page)
+		} else if end > len(posts) {
+			fmt.Printf("Page %02d: %s\n", page, posts[start:])
 		} else {
 			fmt.Printf("Page %02d: %s\n", page, posts[start:end])
 		}
