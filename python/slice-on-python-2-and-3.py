@@ -1,3 +1,5 @@
+import random
+import string
 import sys
 import time
 
@@ -5,8 +7,11 @@ import time
 def data():
     if not hasattr(data, 'data'):
         print('Creating data...')
-        fmt = '#%05d this is yet another string that also ends with carnival\n'
-        data.data = [fmt % d for d in range(999999)]
+        random_string = ''.join(random.choice(
+            string.ascii_letters + string.digits
+        ) for _ in range(9999))
+        fmt = '#%05d (%s) just a string that also ends with carnival\n'
+        data.data = [fmt % (d, random_string) for d in range(99999)]
 
     def decorator(f):
 
