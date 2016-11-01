@@ -28,3 +28,10 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t = BinarySearchTree()
         t['name'] = 'Doge'
         self.assertEquals(t['name'], 'Doge')
+
+    def test_can_set_and_get_two_items(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
+        t['does'] = 'bark'
+        self.assertEquals(t['name'], 'Doge')
+        self.assertEquals(t['does'], 'bark')
