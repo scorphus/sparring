@@ -1,3 +1,10 @@
+class Node:
+
+    def __init__(self, key, val):
+        self._key = key
+        self._val = val
+
+
 class BinarySearchTree:
 
     def __init__(self):
@@ -12,3 +19,6 @@ class BinarySearchTree:
             return self._root.__iter__()
         else:
             return iter(())
+
+    def __setitem__(self, key, val):
+        self._root = Node(key, val)

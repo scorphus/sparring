@@ -19,3 +19,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
             iter(t)
         except TypeError:
             raise AssertionError('BinarySearchTree is not iterable')
+
+    def test_can_set_the_first_leaf(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
