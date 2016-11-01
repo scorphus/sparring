@@ -4,6 +4,9 @@ class Node:
         self._key = key
         self._val = val
 
+    def value(self):
+        return self._val
+
 
 class BinarySearchTree:
 
@@ -22,3 +25,6 @@ class BinarySearchTree:
 
     def __setitem__(self, key, val):
         self._root = Node(key, val)
+
+    def __getitem__(self, key):
+        return self._root.value()

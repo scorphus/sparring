@@ -23,3 +23,8 @@ class BinarySearchTreeTestCase(unittest.TestCase):
     def test_can_set_the_first_leaf(self):
         t = BinarySearchTree()
         t['name'] = 'Doge'
+
+    def test_can_set_and_get_the_first_leaf(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
+        self.assertEquals(t['name'], 'Doge')
