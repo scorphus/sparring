@@ -54,3 +54,23 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(t[4], 'bark')
         self.assertEqual(t[6], 'wow')
         self.assertEqual(t[2], 'scare')
+
+
+class BinarySearchTreeItemsTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.t = BinarySearchTree()
+        self.t['name'] = 'Doge'
+        self.t['does'] = 'bark'
+
+    def test_can_convert_tree_to_list(self):
+        keys = list(self.t)
+        self.assertListEqual(keys, ['name', 'does'])
+
+    def test_can_check_element_in_tree(self):
+        self.assertIn('name', self.t)
+        self.assertIn('does', self.t)
+
+    def test_can_check_element_not_in_tree(self):
+        self.assertNotIn('surname', self.t)
+        self.assertNotIn('color', self.t)

@@ -24,6 +24,15 @@ class Node:
             else:
                 self._right[key] = val
 
+    def __iter__(self):
+        if self._left:
+            for n in self._left:
+                yield n
+        yield self._key
+        if self._right:
+            for n in self._right:
+                yield n
+
     def __getitem__(self, key):
         if self._key == key:
             return self._val
