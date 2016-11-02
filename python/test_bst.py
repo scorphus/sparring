@@ -65,7 +65,7 @@ class BinarySearchTreeItemsTestCase(unittest.TestCase):
 
     def test_can_convert_tree_to_list(self):
         keys = list(self.t)
-        self.assertListEqual(keys, ['name', 'does'])
+        self.assertListEqual(keys, ['does', 'name'])
 
     def test_can_check_element_in_tree(self):
         self.assertIn('name', self.t)

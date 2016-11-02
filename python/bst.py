@@ -16,7 +16,7 @@ class Node:
         pickle_key = pickle.dumps(key)
         if self._key == key:
             self._val = val
-        elif self._pickle_key < pickle_key:
+        elif self._pickle_key > pickle_key:
             if not self._left:
                 self._left = Node(key, val, self)
                 self._incr()
@@ -42,7 +42,7 @@ class Node:
         pickle_key = pickle.dumps(key)
         if self._key == key:
             return self._val
-        elif self._pickle_key < pickle_key:
+        elif self._pickle_key > pickle_key:
             if self._left:
                 return self._left[key]
         else:
