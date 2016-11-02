@@ -116,14 +116,14 @@ class BinarySearchTree:
             return self._root[key]
         raise KeyError(key)
 
-    def values(self):
-        if self._root:
-            return self._root.values()
-        return iter([])
-
     def keys(self):
         if self._root:
             return self._root.keys()
+        return iter([])
+
+    def values(self):
+        if self._root:
+            return self._root.values()
         return iter([])
 
     def find_min(self):
