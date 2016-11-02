@@ -30,13 +30,7 @@ class Node:
                 self._right[key] = val
 
     def __iter__(self):
-        if self._left:
-            for n in self._left:
-                yield n
-        yield self._key
-        if self._right:
-            for n in self._right:
-                yield n
+        return self.keys()
 
     def __getitem__(self, key):
         pickle_key = pickle.dumps(key)
@@ -56,6 +50,24 @@ class Node:
         self._length += 1
         if self._par:
             self._par._incr()
+
+    def keys(self):
+        if self._left:
+            for key in self._left:
+                yield key
+        yield self._key
+        if self._right:
+            for key in self._right:
+                yield key
+
+    def values(self):
+        if self._left:
+            for val in self._left.values():
+                yield val
+        yield self._val
+        if self._right:
+            for val in self._right.values():
+                yield val
 
 
 class BinarySearchTree:
@@ -80,3 +92,9 @@ class BinarySearchTree:
 
     def __getitem__(self, key):
         return self._root[key]
+
+    def values(self):
+        return self._root.values()
+
+    def keys(self):
+        return self._root.keys()
