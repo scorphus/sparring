@@ -145,3 +145,11 @@ class BinarySearchTree:
         if self._root:
             return self._root.get_max()
         raise ValueError('empty sequence')
+
+    def get(self, key, default=None):
+        if self._root:
+            try:
+                return self._root[key]
+            except KeyError:
+                pass
+        return default

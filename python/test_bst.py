@@ -39,6 +39,12 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t['name'] = 'Doge'
         self.assertEqual(len(t), 1)
 
+    def test_can_set_and_get(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
+        self.assertEqual(t['name'], 'Doge')
+        self.assertEqual(t.get('name'), 'Doge')
+
     def test_can_set_and_get_the_first_leaf(self):
         t = BinarySearchTree()
         t['name'] = 'Doge'
@@ -75,12 +81,30 @@ class BinarySearchTreeTestCase(unittest.TestCase):
             t[1]
         self.assertEqual(e.exception.args[0], 1)
 
-    def test_throws_key_error_when_getting_a_nonexistent_key(self):
+    def test_throws_key_error_when_indexing_a_nonexistent_key(self):
         t = BinarySearchTree()
         t[0] = 0
         with self.assertRaises(KeyError) as e:
             t[1]
         self.assertEqual(e.exception.args[0], 1)
+
+    def test_returns_none_when_getting_a_key_from_an_empty_tree(self):
+        t = BinarySearchTree()
+        self.assertEqual(t.get(1), None)
+
+    def test_returns_none_when_getting_a_nonexisting_key(self):
+        t = BinarySearchTree()
+        t[0] = 0
+        self.assertEqual(t.get(1), None)
+
+    def test_returns_default_when_getting_a_key_from_an_empty_tree(self):
+        t = BinarySearchTree()
+        self.assertEqual(t.get(1, 0), 0)
+
+    def test_returns_default_when_getting_a_nonexisting_key(self):
+        t = BinarySearchTree()
+        t[0] = 0
+        self.assertEqual(t.get(1, 1), 1)
 
     def test_throws_value_error_when_finding_min_from_empty_tree(self):
         t = BinarySearchTree()
