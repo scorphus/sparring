@@ -69,9 +69,29 @@ class Node:
             for val in self._right.values():
                 yield val
 
+    def find_minimum(self):
+        if self._left:
+            return self._left.find_minimum()
+        return self._key
+
+    def find_maximum(self):
+        if self._right:
+            return self._right.find_maximum()
+        return self._key
+
+    def get_minimum(self):
+        if self._left:
+            return self._left.get_minimum()
+        return self._val
+
+    def get_maximum(self):
+        if self._right:
+            return self._right.get_maximum()
+        return self._val
+
 
 class BinarySearchTree:
-
+    
     def __init__(self):
         self._root = None
 
@@ -98,3 +118,15 @@ class BinarySearchTree:
 
     def keys(self):
         return self._root.keys()
+
+    def find_minimum(self):
+        return self._root.find_minimum()
+
+    def find_maximum(self):
+        return self._root.find_maximum()
+
+    def get_minimum(self):
+        return self._root.get_minimum()
+
+    def get_maximum(self):
+        return self._root.get_maximum()

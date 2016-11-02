@@ -102,3 +102,15 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
         self.assertEquals(self.t[4], 'bark')
         self.assertEquals(self.t[6], 'wow')
         self.assertEquals(self.t[2], 'scare')
+
+    def test_can_find_minimum(self):
+        self.assertEquals(self.t.find_minimum(), 2)
+
+    def test_can_find_maximum(self):
+        self.assertEquals(self.t.find_maximum(), 'name')
+
+    def test_can_get_minimum(self):
+        self.assertEquals(self.t.get_minimum(), 'scare')
+
+    def test_can_get_maximum(self):
+        self.assertEquals(self.t.get_maximum(), 'Doge')
