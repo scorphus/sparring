@@ -1,7 +1,11 @@
+import pickle
+
+
 class Node:
 
     def __init__(self, key, val, par=None, left=None, right=None):
         self._key = key
+        self._pickle_key = pickle.dumps(key)
         self._val = val
         self._par = par
         self._left = left
@@ -9,9 +13,10 @@ class Node:
         self._length = 1
 
     def __setitem__(self, key, val):
+        pickle_key = pickle.dumps(key)
         if self._key == key:
             self._val = val
-        elif self._key < key:
+        elif self._pickle_key < pickle_key:
             if not self._left:
                 self._left = Node(key, val, self)
                 self._incr()
@@ -34,9 +39,10 @@ class Node:
                 yield n
 
     def __getitem__(self, key):
+        pickle_key = pickle.dumps(key)
         if self._key == key:
             return self._val
-        elif self._key < key:
+        elif self._pickle_key < pickle_key:
             if self._left:
                 return self._left[key]
         else:
