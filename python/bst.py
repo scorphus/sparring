@@ -42,6 +42,7 @@ class Node:
         else:
             if self._right:
                 return self._right[key]
+        raise KeyError(key)
 
     def __len__(self):
         return self._length
@@ -111,22 +112,36 @@ class BinarySearchTree:
             self._root[key] = val
 
     def __getitem__(self, key):
-        return self._root[key]
+        if self._root:
+            return self._root[key]
+        raise KeyError(key)
 
     def values(self):
-        return self._root.values()
+        if self._root:
+            return self._root.values()
+        return iter([])
 
     def keys(self):
-        return self._root.keys()
+        if self._root:
+            return self._root.keys()
+        return iter([])
 
     def find_minimum(self):
-        return self._root.find_minimum()
+        if self._root:
+            return self._root.find_minimum()
+        raise ValueError('empty sequence')
 
     def find_maximum(self):
-        return self._root.find_maximum()
+        if self._root:
+            return self._root.find_maximum()
+        raise ValueError('empty sequence')
 
     def get_minimum(self):
-        return self._root.get_minimum()
+        if self._root:
+            return self._root.get_minimum()
+        raise ValueError('empty sequence')
 
     def get_maximum(self):
-        return self._root.get_maximum()
+        if self._root:
+            return self._root.get_maximum()
+        raise ValueError('empty sequence')
