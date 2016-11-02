@@ -6,7 +6,7 @@ class Node:
         self._par = par
         self._left = left
         self._right = right
-        self.size = 1
+        self._length = 1
 
     def __setitem__(self, key, val):
         if self._key == key:
@@ -34,8 +34,11 @@ class Node:
             if self._right:
                 return self._right[key]
 
+    def __len__(self):
+        return self._length
+
     def _incr(self):
-        self.size += 1
+        self._length += 1
         if self._par:
             self._par._incr()
 
@@ -46,7 +49,7 @@ class BinarySearchTree:
         self._root = None
 
     def __len__(self):
-        return self._root.size if self._root else 0
+        return len(self._root) if self._root else 0
 
     def __iter__(self):
         if self._root:
