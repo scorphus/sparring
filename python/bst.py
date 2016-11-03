@@ -47,9 +47,74 @@ class Node:
     def __len__(self):
         return self._length
 
+    def __delitem__(self, key):
+        pickle_key = pickle.dumps(key)
+        if self._key == key:
+            self._delete()
+            return
+        elif self._pickle_key > pickle_key:
+            if self._left:
+                del(self._left[key])
+                return
+        else:
+            if self._right:
+                del(self._right[key])
+                return
+        raise KeyError(key)
+
+    @property
+    def _is_root(self):
+        return hasattr(self._par, '_root')
+
+    def _upadte_length(self):
+        l_len = self._left._length if self._left else 0
+        r_len = self._right._length if self._right else 0
+        self._length = 1 + l_len + r_len
+        if self._par and not self._is_root:
+            self._par._upadte_length()
+
+    def _promote_left(self):
+        self._left.max()._right = self._right
+        self._right._upadte_length()
+
+    def _promote_right(self):
+        self._right.min()._left = self._left
+        self._left._upadte_length()
+
+    def _delete(self):
+        if self._left and self._right:
+            if self._left._length > self._right._length:
+                self._promote_left()
+            else:
+                self._promote_right()
+        elif self._right and not self._left:
+            if self._is_root:
+                self._par._root = self._right
+            else:
+                self._par._right = self._right
+            self._right._par = self._par
+            self._right._upadte_length()
+        elif self._left and not self._right:
+            if self._is_root:
+                self._par._root = self._left
+            else:
+                self._par._left = self._left
+            self._left._par = self._par
+            self._left._upadte_length()
+        else:
+            if self._is_root:
+                self._par._root = None
+            else:
+                if self._par._left and self._par._left == self:
+                    self._par._left = None
+                else:
+                    self._par._right = None
+                self._par._upadte_length()
+        del(self._val)
+
     def _incr(self):
         self._length += 1
-        if self._par:
+        if self._par and not self._is_root:
             self._par._incr()
 
     def keys(self):
@@ -109,13 +174,19 @@ class BinarySearchTree:
 
     def __setitem__(self, key, val):
         if not self._root:
-            self._root = Node(key, val)
+            self._root = Node(key, val, self)
         else:
             self._root[key] = val
 
     def __getitem__(self, key):
         if self._root:
             return self._root[key]
+        raise KeyError(key)
+
+    def __delitem__(self, key):
+        if self._root:
+            del(self._root[key])
+            return
         raise KeyError(key)
 
     def keys(self):
