@@ -106,28 +106,28 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t[0] = 0
         self.assertEqual(t.get(1, 1), 1)
 
-    def test_throws_value_error_when_finding_min_from_empty_tree(self):
+    def test_throws_value_error_when_getting_min_key_from_empty_tree(self):
         t = BinarySearchTree()
         with self.assertRaises(ValueError) as e:
-            t.find_min()
+            t.min_key()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_finding_max_from_empty_tree(self):
+    def test_throws_value_error_when_getting_max_key_from_empty_tree(self):
         t = BinarySearchTree()
         with self.assertRaises(ValueError) as e:
-            t.find_max()
+            t.max_key()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_getting_min_from_empty_tree(self):
+    def test_throws_value_error_when_getting_min_val_from_empty_tree(self):
         t = BinarySearchTree()
         with self.assertRaises(ValueError) as e:
-            t.get_min()
+            t.min_val()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_getting_max_from_empty_tree(self):
+    def test_throws_value_error_when_getting_max_val_from_empty_tree(self):
         t = BinarySearchTree()
         with self.assertRaises(ValueError) as e:
-            t.get_max()
+            t.max_val()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
 
@@ -178,14 +178,14 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
         self.assertEquals(self.t[6], 'wow')
         self.assertEquals(self.t[2], 'scare')
 
-    def test_can_find_min(self):
-        self.assertEquals(self.t.find_min(), 2)
+    def test_can_get_min_key(self):
+        self.assertEquals(self.t.min_key(), 2)
 
-    def test_can_find_max(self):
-        self.assertEquals(self.t.find_max(), 'name')
+    def test_can_get_max_key(self):
+        self.assertEquals(self.t.max_key(), 'name')
 
-    def test_can_get_min(self):
-        self.assertEquals(self.t.get_min(), 'scare')
+    def test_can_get_min_val(self):
+        self.assertEquals(self.t.min_val(), 'scare')
 
-    def test_can_get_max(self):
-        self.assertEquals(self.t.get_max(), 'Doge')
+    def test_can_get_max_val(self):
+        self.assertEquals(self.t.max_val(), 'Doge')

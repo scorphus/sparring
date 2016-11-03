@@ -70,25 +70,27 @@ class Node:
             for val in self._right.values():
                 yield val
 
-    def find_min(self):
+    def _min(self):
         if self._left:
-            return self._left.find_min()
-        return self._key
+            return self._left._min()
+        return self
 
-    def find_max(self):
+    def _max(self):
         if self._right:
-            return self._right.find_max()
-        return self._key
+            return self._right._min()
+        return self
 
-    def get_min(self):
-        if self._left:
-            return self._left.get_min()
-        return self._val
+    def min_key(self):
+        return self._min()._key
 
-    def get_max(self):
-        if self._right:
-            return self._right.get_max()
-        return self._val
+    def max_key(self):
+        return self._max()._key
+
+    def min_val(self):
+        return self._min()._val
+
+    def max_val(self):
+        return self._max()._val
 
 
 class BinarySearchTree:
@@ -126,24 +128,24 @@ class BinarySearchTree:
             return self._root.values()
         return iter([])
 
-    def find_min(self):
+    def min_key(self):
         if self._root:
-            return self._root.find_min()
+            return self._root.min_key()
         raise ValueError('empty sequence')
 
-    def find_max(self):
+    def max_key(self):
         if self._root:
-            return self._root.find_max()
+            return self._root.max_key()
         raise ValueError('empty sequence')
 
-    def get_min(self):
+    def min_val(self):
         if self._root:
-            return self._root.get_min()
+            return self._root.min_val()
         raise ValueError('empty sequence')
 
-    def get_max(self):
+    def max_val(self):
         if self._root:
-            return self._root.get_max()
+            return self._root.max_val()
         raise ValueError('empty sequence')
 
     def get(self, key, default=None):
