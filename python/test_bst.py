@@ -1,3 +1,4 @@
+import random
 import unittest
 
 from bst import BinarySearchTree
@@ -34,10 +35,21 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         except:
             raise AssertionError('Can not get values of an empty tree')
 
-    def test_can_set_the_first_leaf(self):
+    def test_can_set_the_root(self):
         t = BinarySearchTree()
         t['name'] = 'Doge'
         self.assertEqual(len(t), 1)
+
+    def test_can_set_and_get_the_root(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
+        self.assertEqual(t['name'], 'Doge')
+
+    def test_can_set_and_delete_the_root(self):
+        t = BinarySearchTree()
+        t['name'] = 'Doge'
+        del(t['name'])
+        self.assertEqual(len(t), 0)
 
     def test_can_set_and_get(self):
         t = BinarySearchTree()
@@ -217,3 +229,17 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
         self.assertEqual(len(self.t), 6)
         del(self.t['name'])
         self.assertEqual(len(self.t), 5)
+
+
+class BinarySearchTreeMassiveTestCase(unittest.TestCase):
+
+    range_max = 10000
+
+    def test_solution_big_1(self):
+        max_ = 2147483647
+        t = BinarySearchTree()
+        for i in range(self.range_max):
+            key = int(max_ * random.random())
+            t[key] = i
+
+        self.assertGreaterEqual(len(t), 0)

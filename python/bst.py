@@ -1,121 +1,95 @@
-import pickle
-
-
 class Node:
 
-    def __init__(self, key, val, par=None, left=None, right=None):
+    def __init__(self, key, val, par):
         self._key = key
-        self._pickle_key = pickle.dumps(key)
+        self._str_key = str(key)
         self._val = val
         self._par = par
-        self._left = left
-        self._right = right
+        self._left = None
+        self._right = None
         self._length = 1
 
-    def __setitem__(self, key, val):
-        pickle_key = pickle.dumps(key)
+    def _setitem(self, key, val):
+        str_key = str(key)
         if self._key == key:
             self._val = val
-        elif self._pickle_key > pickle_key:
+            return 0
+        if self._str_key > str_key:
             if not self._left:
                 self._left = Node(key, val, self)
-                self._incr()
-            else:
-                self._left[key] = val
-        else:
-            if not self._right:
-                self._right = Node(key, val, self)
-                self._incr()
-            else:
-                self._right[key] = val
+                return 1
+            return self._left._setitem(key, val)
+        if not self._right:
+            self._right = Node(key, val, self)
+            return 1
+        return self._right._setitem(key, val)
+
+    def __setitem__(self, key, val):
+        self._length += self._setitem(key, val)
 
     def __iter__(self):
         return self.keys()
 
     def __getitem__(self, key):
-        pickle_key = pickle.dumps(key)
+        str_key = str(key)
         if self._key == key:
             return self._val
-        elif self._pickle_key > pickle_key:
-            if self._left:
-                return self._left[key]
-        else:
-            if self._right:
-                return self._right[key]
+        if self._str_key > str_key and self._left:
+            return self._left[key]
+        if self._right:
+            return self._right[key]
         raise KeyError(key)
 
     def __len__(self):
         return self._length
 
-    def __delitem__(self, key):
-        pickle_key = pickle.dumps(key)
+    def _delitem(self, key):
+        str_key = str(key)
         if self._key == key:
             self._delete()
-            return
-        elif self._pickle_key > pickle_key:
-            if self._left:
-                del(self._left[key])
-                return
-        else:
-            if self._right:
-                del(self._right[key])
-                return
+            return 1
+        if self._str_key > str_key and self._left:
+            return self._left._delitem(key)
+        if self._right:
+            return self._right._delitem(key)
         raise KeyError(key)
+
+    def __delitem__(self, key):
+        self._length -= self._delitem(key)
 
     @property
     def _is_root(self):
         return hasattr(self._par, '_root')
 
-    def _upadte_length(self):
-        l_len = self._left._length if self._left else 0
-        r_len = self._right._length if self._right else 0
-        self._length = 1 + l_len + r_len
-        if self._par and not self._is_root:
-            self._par._upadte_length()
-
-    def _promote_left(self):
-        self._left.max()._right = self._right
-        self._right._upadte_length()
-
-    def _promote_right(self):
-        self._right.min()._left = self._left
-        self._left._upadte_length()
-
     def _delete(self):
+        del(self._val)
         if self._left and self._right:
             if self._left._length > self._right._length:
-                self._promote_left()
+                self._left.max()._right = self._right
             else:
-                self._promote_right()
+                self._right.min()._left = self._left
         elif self._right and not self._left:
             if self._is_root:
                 self._par._root = self._right
             else:
                 self._par._right = self._right
             self._right._par = self._par
-            self._right._upadte_length()
         elif self._left and not self._right:
             if self._is_root:
                 self._par._root = self._left
             else:
                 self._par._left = self._left
             self._left._par = self._par
-            self._left._upadte_length()
         else:
             if self._is_root:
                 self._par._root = None
+                return
+            if self._par._left and self._par._left == self:
+                self._par._left = None
             else:
-                if self._par._left and self._par._left == self:
-                    self._par._left = None
-                else:
-                    self._par._right = None
-                self._par._upadte_length()
-        del(self._val)
-
-    def _incr(self):
-        self._length += 1
-        if self._par and not self._is_root:
-            self._par._incr()
+                self._par._right = None
+        if self._is_root:
+            self._par._root._length = self._length - 1
 
     def keys(self):
         if self._left:
@@ -169,8 +143,7 @@ class BinarySearchTree:
     def __iter__(self):
         if self._root:
             return iter(self._root)
-        else:
-            return iter(())
+        return iter(())
 
     def __setitem__(self, key, val):
         if not self._root:
