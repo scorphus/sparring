@@ -49,19 +49,9 @@ class Node(object):
     def __len__(self):
         return self._length
 
-    def _delitem(self, key):
-        str_key = str(key)
-        if self._key == key:
-            self._delete()
-            return 1
-        if self._str_key > str_key and self._left:
-            return self._left._delitem(key)
-        if self._right:
-            return self._right._delitem(key)
-        raise KeyError(key)
-
     def __delitem__(self, key):
-        self._length -= self._delitem(key)
+        self._getitem(key)._delete()
+        self._length -= 1
 
     @property
     def _is_root(self):
@@ -109,8 +99,6 @@ class Node(object):
             self._left._par = self._par
         else:
             self._disconnect()
-        if self._is_root and self._par._root:
-            self._par._root._length = self._length - 1
 
     def keys(self):
         if self._left:
