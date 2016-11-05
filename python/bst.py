@@ -9,6 +9,9 @@ class Node(object):
         self._right = None
         self._length = 1
 
+    def __eq__(self, node):
+        return self._str_key == node._str_key
+
     def _setitem(self, key, val):
         str_key = str(key)
         if self._key == key:
@@ -30,15 +33,18 @@ class Node(object):
     def __iter__(self):
         return self.keys()
 
-    def __getitem__(self, key):
+    def _getitem(self, key):
         str_key = str(key)
         if self._key == key:
-            return self._val
+            return self
         if self._str_key > str_key and self._left:
-            return self._left[key]
+            return self._left._getitem(key)
         if self._right:
-            return self._right[key]
+            return self._right._getitem(key)
         raise KeyError(key)
+
+    def __getitem__(self, key):
+        return self._getitem(key)._val
 
     def __len__(self):
         return self._length
@@ -131,6 +137,26 @@ class Node(object):
     def max_val(self):
         return self._max()._val
 
+    def _successor(self):
+        if self._right:
+            return self._right._min()
+        if self._par and not self._is_root:
+            if self._par._left and self._par._left == self:
+                return self._par
+            self._par._right = None
+            successor = self._par._successor()
+            self._par._right = self
+            return successor
+
+    def successor_key(self, key):
+        successor = self._getitem(key)._successor()
+        return successor._key if successor else None
+
+    def successor_val(self, key):
+        successor = self._getitem(key)._successor()
+        return successor._val if successor else None
+
+
 class BinarySearchTree(object):
 
     def __init__(self):
@@ -190,6 +216,16 @@ class BinarySearchTree(object):
         if self._root:
             return self._root.max_val()
         raise ValueError('empty sequence')
+
+    def successor_key(self, key):
+        if self._root:
+            return self._root.successor_key(key)
+        raise KeyError(key)
+
+    def successor_val(self, key):
+        if self._root:
+            return self._root.successor_val(key)
+        raise KeyError(key)
 
     def get(self, key, default=None):
         if self._root:

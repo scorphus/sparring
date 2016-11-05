@@ -230,6 +230,22 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
         del self.t['name']
         self.assertEqual(len(self.t), 5)
 
+    def test_can_find_successor_key(self):
+        self.assertEqual(self.t.successor_key(2), 3)
+        self.assertEqual(self.t.successor_key(4), 6)
+        self.assertEqual(self.t.successor_key(6), 'does')
+        self.assertEqual(self.t.successor_key(3), 4)
+        self.assertEqual(self.t.successor_key('does'), 'name')
+        self.assertEqual(self.t.successor_key('name'), None)
+
+    def test_can_find_successor_val(self):
+        self.assertEqual(self.t.successor_val(2), 'much')
+        self.assertEqual(self.t.successor_val(4), 'wow')
+        self.assertEqual(self.t.successor_val(6), 'bark')
+        self.assertEqual(self.t.successor_val(3), 'bark')
+        self.assertEqual(self.t.successor_val('does'), 'Doge')
+        self.assertEqual(self.t.successor_val('name'), None)
+
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):
 
