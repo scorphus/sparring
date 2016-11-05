@@ -186,6 +186,17 @@ class BinarySearchTree(object):
         self._root = None
         self._key_flat = key_flattener
 
+    @property
+    def _root_or_value_error(self):
+        if self._root:
+            return self._root
+        raise ValueError('empty sequence')
+
+    def _root_or_key_error(self, key):
+        if self._root:
+            return self._root
+        raise KeyError(key)
+
     def __len__(self):
         return len(self._root) if self._root else 0
 
@@ -201,15 +212,10 @@ class BinarySearchTree(object):
             self._root[key] = val
 
     def __getitem__(self, key):
-        if self._root:
-            return self._root[key]
-        raise KeyError(key)
+        return self._root_or_key_error(key)[key]
 
     def __delitem__(self, key):
-        if self._root:
-            del self._root[key]
-            return
-        raise KeyError(key)
+        del self._root_or_key_error(key)[key]
 
     def keys(self):
         if self._root:
@@ -222,49 +228,31 @@ class BinarySearchTree(object):
         return iter([])
 
     def min_key(self):
-        if self._root:
-            return self._root.min_key()
-        raise ValueError('empty sequence')
+        return self._root_or_value_error.min_key()
 
     def max_key(self):
-        if self._root:
-            return self._root.max_key()
-        raise ValueError('empty sequence')
+        return self._root_or_value_error.max_key()
 
     def min_val(self):
-        if self._root:
-            return self._root.min_val()
-        raise ValueError('empty sequence')
+        return self._root_or_value_error.min_val()
 
     def max_val(self):
-        if self._root:
-            return self._root.max_val()
-        raise ValueError('empty sequence')
+        return self._root_or_value_error.max_val()
 
     def successor_key(self, key):
-        if self._root:
-            return self._root.successor_key(key)
-        raise KeyError(key)
+        return self._root_or_key_error(key).successor_key(key)
 
     def successor_val(self, key):
-        if self._root:
-            return self._root.successor_val(key)
-        raise KeyError(key)
+        return self._root_or_key_error(key).successor_val(key)
 
     def predecessor_key(self, key):
-        if self._root:
-            return self._root.predecessor_key(key)
-        raise KeyError(key)
+        return self._root_or_key_error(key).predecessor_key(key)
 
     def predecessor_val(self, key):
-        if self._root:
-            return self._root.predecessor_val(key)
-        raise KeyError(key)
+        return self._root_or_key_error(key).predecessor_val(key)
 
     def get(self, key, default=None):
-        if self._root:
-            try:
-                return self._root[key]
-            except KeyError:
-                pass
-        return default
+        try:
+            return self._root_or_value_error[key]
+        except (KeyError, ValueError):
+            return default
