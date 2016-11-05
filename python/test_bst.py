@@ -189,6 +189,7 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.t[4] = 'bark'
         self.t[6] = 'wow'
         self.t[2] = 'scare'
+        self.t['yawns'] = 'wide'
 
     def test_can_get_any_item(self):
         self.assertEqual(self.t['name'], 'Doge')
@@ -197,33 +198,34 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(self.t[4], 'bark')
         self.assertEqual(self.t[6], 'wow')
         self.assertEqual(self.t[2], 'scare')
+        self.assertEqual(self.t['yawns'], 'wide')
 
     def test_can_get_min_key(self):
         self.assertEqual(self.t.min_key(), 2)
 
     def test_can_get_max_key(self):
-        self.assertEqual(self.t.max_key(), 'name')
+        self.assertEqual(self.t.max_key(), 'yawns')
 
     def test_can_get_min_val(self):
         self.assertEqual(self.t.min_val(), 'scare')
 
     def test_can_get_max_val(self):
-        self.assertEqual(self.t.max_val(), 'Doge')
+        self.assertEqual(self.t.max_val(), 'wide')
 
     def test_can_delete_an_item(self):
-        self.assertEqual(len(self.t), 6)
+        self.assertEqual(len(self.t), 7)
         del self.t[4]
-        self.assertEqual(len(self.t), 5)
+        self.assertEqual(len(self.t), 6)
 
     def test_can_delete_a_leaf(self):
-        self.assertEqual(len(self.t), 6)
+        self.assertEqual(len(self.t), 7)
         del self.t[2]
-        self.assertEqual(len(self.t), 5)
+        self.assertEqual(len(self.t), 6)
 
     def test_can_delete_root(self):
-        self.assertEqual(len(self.t), 6)
+        self.assertEqual(len(self.t), 7)
         del self.t['name']
-        self.assertEqual(len(self.t), 5)
+        self.assertEqual(len(self.t), 6)
 
     def test_can_find_successor_key(self):
         self.assertEqual(self.t.successor_key(2), 3)
@@ -231,7 +233,8 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(self.t.successor_key(6), 'does')
         self.assertEqual(self.t.successor_key(3), 4)
         self.assertEqual(self.t.successor_key('does'), 'name')
-        self.assertEqual(self.t.successor_key('name'), None)
+        self.assertEqual(self.t.successor_key('name'), 'yawns')
+        self.assertEqual(self.t.successor_key('yawns'), None)
 
     def test_can_find_successor_val(self):
         self.assertEqual(self.t.successor_val(2), 'much')
@@ -239,7 +242,8 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(self.t.successor_val(6), 'bark')
         self.assertEqual(self.t.successor_val(3), 'bark')
         self.assertEqual(self.t.successor_val('does'), 'Doge')
-        self.assertEqual(self.t.successor_val('name'), None)
+        self.assertEqual(self.t.successor_val('name'), 'wide')
+        self.assertEqual(self.t.successor_val('yawns'), None)
 
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):

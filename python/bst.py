@@ -122,7 +122,7 @@ class Node(object):
 
     def _max(self):
         if self._right:
-            return self._right._min()
+            return self._right._max()
         return self
 
     def min_key(self):
