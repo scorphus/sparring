@@ -156,7 +156,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
 
-class BinarySearchTreeItemsTestCase(unittest.TestCase):
+class HomogeneousBinarySearchTreeTestCase(unittest.TestCase):
 
     def setUp(self):
         self.t = BinarySearchTree()
@@ -184,7 +184,7 @@ class BinarySearchTreeItemsTestCase(unittest.TestCase):
         self.assertNotIn('color', self.t)
 
 
-class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
+class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
 
     def setUp(self):
         self.t = BinarySearchTree()
