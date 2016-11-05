@@ -61,7 +61,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t = BinarySearchTree()
         t['name'] = 'Doge'
         self.assertEqual(len(t), 1)
-        self.assertEquals(t['name'], 'Doge')
+        self.assertEqual(t['name'], 'Doge')
 
     def test_can_set_and_get_two_items(self):
         t = BinarySearchTree()
@@ -70,8 +70,8 @@ class BinarySearchTreeTestCase(unittest.TestCase):
 
         self.assertEqual(len(t), 2)
 
-        self.assertEquals(t['name'], 'Doge')
-        self.assertEquals(t['does'], 'bark')
+        self.assertEqual(t['name'], 'Doge')
+        self.assertEqual(t['does'], 'bark')
 
     def test_can_add_and_get_many_items(self):
         t = BinarySearchTree()
@@ -196,24 +196,24 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
         self.t[2] = 'scare'
 
     def test_can_get_any_item(self):
-        self.assertEquals(self.t['name'], 'Doge')
-        self.assertEquals(self.t['does'], 'bark')
-        self.assertEquals(self.t[3], 'much')
-        self.assertEquals(self.t[4], 'bark')
-        self.assertEquals(self.t[6], 'wow')
-        self.assertEquals(self.t[2], 'scare')
+        self.assertEqual(self.t['name'], 'Doge')
+        self.assertEqual(self.t['does'], 'bark')
+        self.assertEqual(self.t[3], 'much')
+        self.assertEqual(self.t[4], 'bark')
+        self.assertEqual(self.t[6], 'wow')
+        self.assertEqual(self.t[2], 'scare')
 
     def test_can_get_min_key(self):
-        self.assertEquals(self.t.min_key(), 2)
+        self.assertEqual(self.t.min_key(), 2)
 
     def test_can_get_max_key(self):
-        self.assertEquals(self.t.max_key(), 'name')
+        self.assertEqual(self.t.max_key(), 'name')
 
     def test_can_get_min_val(self):
-        self.assertEquals(self.t.min_val(), 'scare')
+        self.assertEqual(self.t.min_val(), 'scare')
 
     def test_can_get_max_val(self):
-        self.assertEquals(self.t.max_val(), 'Doge')
+        self.assertEqual(self.t.max_val(), 'Doge')
 
     def test_can_delete_an_item(self):
         self.assertEqual(len(self.t), 6)
