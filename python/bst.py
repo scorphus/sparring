@@ -67,13 +67,34 @@ class Node(object):
     def _is_root(self):
         return hasattr(self._par, '_root')
 
+    def _disconnect(self):
+        if self._is_root:
+            self._par._root = None
+        elif self._par._left and self._par._left == self:
+            self._par._left = None
+        else:
+            self._par._right = None
+
+    def _replace_with(self, node):
+        self._key = node._key
+        self._str_key = node._str_key
+        self._val = node._val
+
+    def _disown_right(self):
+        self._right._par = self._par
+        if self._par._left and self._par._left == self:
+            self._par._left = self._right
+        else:
+            self._par._right = self._right
+
     def _delete(self):
-        del self._val
         if self._left and self._right:
-            if self._left._length > self._right._length:
-                self._left._max()._right = self._right
+            successor = self._successor()
+            self._replace_with(successor)
+            if successor._right:
+                successor._disown_right()
             else:
-                self._right._min()._left = self._left
+                successor._disconnect()
         elif self._right and not self._left:
             if self._is_root:
                 self._par._root = self._right
@@ -87,14 +108,8 @@ class Node(object):
                 self._par._left = self._left
             self._left._par = self._par
         else:
-            if self._is_root:
-                self._par._root = None
-                return
-            if self._par._left and self._par._left == self:
-                self._par._left = None
-            else:
-                self._par._right = None
-        if self._is_root:
+            self._disconnect()
+        if self._is_root and self._par._root:
             self._par._root._length = self._length - 1
 
     def keys(self):

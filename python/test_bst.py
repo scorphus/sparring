@@ -216,16 +216,25 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(len(self.t), 7)
         del self.t[4]
         self.assertEqual(len(self.t), 6)
+        self.assertListEqual(list(self.t), [2, 3, 6, 'does', 'name', 'yawns'])
 
     def test_can_delete_a_leaf(self):
         self.assertEqual(len(self.t), 7)
         del self.t[2]
         self.assertEqual(len(self.t), 6)
+        self.assertListEqual(list(self.t), [3, 4, 6, 'does', 'name', 'yawns'])
+
+    def test_can_delete_a_full_node(self):
+        self.assertEqual(len(self.t), 7)
+        del self.t[3]
+        self.assertEqual(len(self.t), 6)
+        self.assertListEqual(list(self.t), [2, 4, 6, 'does', 'name', 'yawns'])
 
     def test_can_delete_root(self):
         self.assertEqual(len(self.t), 7)
         del self.t['name']
         self.assertEqual(len(self.t), 6)
+        self.assertListEqual(list(self.t), [2, 3, 4, 6, 'does', 'yawns'])
 
     def test_can_find_successor_key(self):
         self.assertEqual(self.t.successor_key(2), 3)
