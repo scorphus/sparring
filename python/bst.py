@@ -65,9 +65,9 @@ class Node(object):
         del self._val
         if self._left and self._right:
             if self._left._length > self._right._length:
-                self._left.max()._right = self._right
+                self._left._max()._right = self._right
             else:
-                self._right.min()._left = self._left
+                self._right._min()._left = self._left
         elif self._right and not self._left:
             if self._is_root:
                 self._par._root = self._right
