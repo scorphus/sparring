@@ -182,7 +182,7 @@ class HomogeneousBinarySearchTreeTestCase(unittest.TestCase):
 class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.t = BinarySearchTree()
+        self.t = BinarySearchTree(str)
         self.t['name'] = 'Doge'
         self.t['does'] = 'bark'
         self.t[3] = 'much'
@@ -271,6 +271,19 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(self.t.predecessor_val('name'), 'bark')
         self.assertEqual(self.t.predecessor_val('yawns'), 'Doge')
         self.assertEqual(self.t.predecessor_val(2), None)
+
+
+class NumericBinarySearchTreeTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.t = BinarySearchTree()
+        self.insert = [8, 10, 3, 1, 6, 4, 7, 14, 13, 15, 17, 2]
+        self.check = sorted(self.insert)
+        for n in self.insert:
+            self.t[n] = n * n
+
+    def test_can_iterate(self):
+        self.assertListEqual(list(self.t), self.check)
 
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):

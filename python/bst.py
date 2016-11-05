@@ -1,29 +1,30 @@
 class Node(object):
 
-    def __init__(self, key, val, par):
+    def __init__(self, key, val, par, key_flattener):
         self._key = key
-        self._str_key = str(key)
+        self._cmp_key = key if not key_flattener else key_flattener(key)
         self._val = val
         self._par = par
         self._left = None
         self._right = None
         self._length = 1
+        self._key_flat = key_flattener
 
     def __eq__(self, node):
-        return self._str_key == node._str_key
+        return self._cmp_key == node._cmp_key
 
     def _setitem(self, key, val):
-        str_key = str(key)
+        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._key == key:
             self._val = val
             return 0
-        if self._str_key > str_key:
+        if self._cmp_key > cmp_key:
             if not self._left:
-                self._left = Node(key, val, self)
+                self._left = Node(key, val, self, self._key_flat)
                 return 1
             return self._left._setitem(key, val)
         if not self._right:
-            self._right = Node(key, val, self)
+            self._right = Node(key, val, self, self._key_flat)
             return 1
         return self._right._setitem(key, val)
 
@@ -34,10 +35,10 @@ class Node(object):
         return self.keys()
 
     def _getitem(self, key):
-        str_key = str(key)
+        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._key == key:
             return self
-        if self._str_key > str_key and self._left:
+        if self._cmp_key > cmp_key and self._left:
             return self._left._getitem(key)
         if self._right:
             return self._right._getitem(key)
@@ -67,7 +68,7 @@ class Node(object):
 
     def _replace_with(self, node):
         self._key = node._key
-        self._str_key = node._str_key
+        self._cmp_key = node._cmp_key
         self._val = node._val
 
     def _disown_right(self):
@@ -181,8 +182,9 @@ class Node(object):
 
 class BinarySearchTree(object):
 
-    def __init__(self):
+    def __init__(self, key_flattener=None):
         self._root = None
+        self._key_flat = key_flattener
 
     def __len__(self):
         return len(self._root) if self._root else 0
@@ -194,7 +196,7 @@ class BinarySearchTree(object):
 
     def __setitem__(self, key, val):
         if not self._root:
-            self._root = Node(key, val, self)
+            self._root = Node(key, val, self, self._key_flat)
         else:
             self._root[key] = val
 
