@@ -14,27 +14,6 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t = BinarySearchTree()
         self.assertEqual(len(t), 0)
 
-    def test_can_iter_over_an_empty_tree(self):
-        t = BinarySearchTree()
-        try:
-            iter(t)
-        except TypeError:
-            raise AssertionError('BinarySearchTree is not iterable')
-
-    def test_can_get_keys_of_empty_tree(self):
-        t = BinarySearchTree()
-        try:
-            t.keys()
-        except:
-            raise AssertionError('Can not get keys of an empty tree')
-
-    def test_can_get_values_of_empty_tree(self):
-        t = BinarySearchTree()
-        try:
-            t.values()
-        except:
-            raise AssertionError('Can not get values of an empty tree')
-
     def test_can_set_the_root(self):
         t = BinarySearchTree()
         t['name'] = 'Doge'
@@ -87,18 +66,6 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(t[6], 'wow')
         self.assertEqual(t[2], 'scare')
 
-    def test_throws_key_error_when_indexing_empty_tree(self):
-        t = BinarySearchTree()
-        with self.assertRaises(KeyError) as e:
-            t[1]
-        self.assertEqual(e.exception.args[0], 1)
-
-    def test_throws_key_error_when_deleting_from_empty_tree(self):
-        t = BinarySearchTree()
-        with self.assertRaises(KeyError) as e:
-            del t[1]
-        self.assertEqual(e.exception.args[0], 1)
-
     def test_throws_key_error_when_indexing_a_nonexistent_key(self):
         t = BinarySearchTree()
         t[0] = 0
@@ -113,46 +80,74 @@ class BinarySearchTreeTestCase(unittest.TestCase):
             del t[1]
         self.assertEqual(e.exception.args[0], 1)
 
-    def test_returns_none_when_getting_a_key_from_an_empty_tree(self):
-        t = BinarySearchTree()
-        self.assertEqual(t.get(1), None)
-
     def test_returns_none_when_getting_a_nonexisting_key(self):
         t = BinarySearchTree()
         t[0] = 0
         self.assertEqual(t.get(1), None)
-
-    def test_returns_default_when_getting_a_key_from_an_empty_tree(self):
-        t = BinarySearchTree()
-        self.assertEqual(t.get(1, 0), 0)
 
     def test_returns_default_when_getting_a_nonexisting_key(self):
         t = BinarySearchTree()
         t[0] = 0
         self.assertEqual(t.get(1, 1), 1)
 
-    def test_throws_value_error_when_getting_min_key_from_empty_tree(self):
-        t = BinarySearchTree()
+
+class EmptyBinarySearchTreeTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.t = BinarySearchTree()
+
+    def test_can_iter(self):
+        try:
+            iter(self.t)
+        except TypeError:
+            raise AssertionError('BinarySearchTree is not iterable')
+
+    def test_can_get_keys(self):
+        try:
+            self.t.keys()
+        except:
+            raise AssertionError('Can not get keys of an empty tree')
+
+    def test_can_get_values(self):
+        try:
+            self.t.values()
+        except:
+            raise AssertionError('Can not get values of an empty tree')
+
+    def test_throws_key_error_when_indexing(self):
+        with self.assertRaises(KeyError) as e:
+            self.t[1]
+        self.assertEqual(e.exception.args[0], 1)
+
+    def test_throws_key_error_when_deleting(self):
+        with self.assertRaises(KeyError) as e:
+            del self.t[1]
+        self.assertEqual(e.exception.args[0], 1)
+
+    def test_returns_none_when_getting_a_key(self):
+        self.assertEqual(self.t.get(1), None)
+
+    def test_returns_default_when_getting_a_key(self):
+        self.assertEqual(self.t.get(1, 0), 0)
+
+    def test_throws_value_error_when_getting_min_key(self):
         with self.assertRaises(ValueError) as e:
-            t.min_key()
+            self.t.min_key()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_getting_max_key_from_empty_tree(self):
-        t = BinarySearchTree()
+    def test_throws_value_error_when_getting_max_key(self):
         with self.assertRaises(ValueError) as e:
-            t.max_key()
+            self.t.max_key()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_getting_min_val_from_empty_tree(self):
-        t = BinarySearchTree()
+    def test_throws_value_error_when_getting_min_val(self):
         with self.assertRaises(ValueError) as e:
-            t.min_val()
+            self.t.min_val()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
-    def test_throws_value_error_when_getting_max_val_from_empty_tree(self):
-        t = BinarySearchTree()
+    def test_throws_value_error_when_getting_max_val(self):
         with self.assertRaises(ValueError) as e:
-            t.max_val()
+            self.t.max_val()
         self.assertEqual(e.exception.args[0], 'empty sequence')
 
 
