@@ -48,7 +48,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
     def test_can_set_and_delete_the_root(self):
         t = BinarySearchTree()
         t['name'] = 'Doge'
-        del(t['name'])
+        del t['name']
         self.assertEqual(len(t), 0)
 
     def test_can_set_and_get(self):
@@ -96,7 +96,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
     def test_throws_key_error_when_deleting_from_empty_tree(self):
         t = BinarySearchTree()
         with self.assertRaises(KeyError) as e:
-            del(t[1])
+            del t[1]
         self.assertEqual(e.exception.args[0], 1)
 
     def test_throws_key_error_when_indexing_a_nonexistent_key(self):
@@ -110,7 +110,7 @@ class BinarySearchTreeTestCase(unittest.TestCase):
         t = BinarySearchTree()
         t[0] = 0
         with self.assertRaises(KeyError) as e:
-            del(t[1])
+            del t[1]
         self.assertEqual(e.exception.args[0], 1)
 
     def test_returns_none_when_getting_a_key_from_an_empty_tree(self):
@@ -217,17 +217,17 @@ class BinarySearchTreeMixedItemsTestCase(unittest.TestCase):
 
     def test_can_delete_an_item(self):
         self.assertEqual(len(self.t), 6)
-        del(self.t[4])
+        del self.t[4]
         self.assertEqual(len(self.t), 5)
 
     def test_can_delete_a_leaf(self):
         self.assertEqual(len(self.t), 6)
-        del(self.t[2])
+        del self.t[2]
         self.assertEqual(len(self.t), 5)
 
     def test_can_delete_root(self):
         self.assertEqual(len(self.t), 6)
-        del(self.t['name'])
+        del self.t['name']
         self.assertEqual(len(self.t), 5)
 
 

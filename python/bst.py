@@ -1,4 +1,4 @@
-class Node:
+class Node(object):
 
     def __init__(self, key, val, par):
         self._key = key
@@ -62,7 +62,7 @@ class Node:
         return hasattr(self._par, '_root')
 
     def _delete(self):
-        del(self._val)
+        del self._val
         if self._left and self._right:
             if self._left._length > self._right._length:
                 self._left.max()._right = self._right
@@ -131,9 +131,8 @@ class Node:
     def max_val(self):
         return self._max()._val
 
+class BinarySearchTree(object):
 
-class BinarySearchTree:
-    
     def __init__(self):
         self._root = None
 
@@ -158,7 +157,7 @@ class BinarySearchTree:
 
     def __delitem__(self, key):
         if self._root:
-            del(self._root[key])
+            del self._root[key]
             return
         raise KeyError(key)
 
