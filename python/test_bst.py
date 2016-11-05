@@ -245,6 +245,24 @@ class HeterogeneousBinarySearchTreeTestCase(unittest.TestCase):
         self.assertEqual(self.t.successor_val('name'), 'wide')
         self.assertEqual(self.t.successor_val('yawns'), None)
 
+    def test_can_find_predecessor_key(self):
+        self.assertEqual(self.t.predecessor_key(3), 2)
+        self.assertEqual(self.t.predecessor_key(6), 4)
+        self.assertEqual(self.t.predecessor_key('does'), 6)
+        self.assertEqual(self.t.predecessor_key(4), 3)
+        self.assertEqual(self.t.predecessor_key('name'), 'does')
+        self.assertEqual(self.t.predecessor_key('yawns'), 'name')
+        self.assertEqual(self.t.predecessor_key(2), None)
+
+    def test_can_find_predecessor_val(self):
+        self.assertEqual(self.t.predecessor_val(3), 'scare')
+        self.assertEqual(self.t.predecessor_val(6), 'bark')
+        self.assertEqual(self.t.predecessor_val('does'), 'wow')
+        self.assertEqual(self.t.predecessor_val(4), 'much')
+        self.assertEqual(self.t.predecessor_val('name'), 'bark')
+        self.assertEqual(self.t.predecessor_val('yawns'), 'Doge')
+        self.assertEqual(self.t.predecessor_val(2), None)
+
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):
 

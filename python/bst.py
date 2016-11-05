@@ -156,6 +156,25 @@ class Node(object):
         successor = self._getitem(key)._successor()
         return successor._val if successor else None
 
+    def _predecessor(self):
+        if self._left:
+            return self._left._max()
+        if self._par and not self._is_root:
+            if self._par._right and self._par._right == self:
+                return self._par
+            self._par._left = None
+            predecessor = self._par._predecessor()
+            self._par._left = self
+            return predecessor
+
+    def predecessor_key(self, key):
+        predecessor = self._getitem(key)._predecessor()
+        return predecessor._key if predecessor else None
+
+    def predecessor_val(self, key):
+        predecessor = self._getitem(key)._predecessor()
+        return predecessor._val if predecessor else None
+
 
 class BinarySearchTree(object):
 
@@ -225,6 +244,16 @@ class BinarySearchTree(object):
     def successor_val(self, key):
         if self._root:
             return self._root.successor_val(key)
+        raise KeyError(key)
+
+    def predecessor_key(self, key):
+        if self._root:
+            return self._root.predecessor_key(key)
+        raise KeyError(key)
+
+    def predecessor_val(self, key):
+        if self._root:
+            return self._root.predecessor_val(key)
         raise KeyError(key)
 
     def get(self, key, default=None):
