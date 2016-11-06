@@ -2,6 +2,7 @@ class IntStackMin(object):
 
     def __init__(self):
         self._stack = list()
+        self._mins = list()
 
     def __iter__(self):
         return iter(self._stack[::-1])
@@ -11,12 +12,17 @@ class IntStackMin(object):
 
     def push(self, num):
         self._stack.append(num)
+        if not len(self._mins) or self._mins[-1] >= num:
+            self._mins.append(num)
 
     def pop(self):
-        return self._stack.pop()
+        num = self._stack.pop()
+        if self._mins[-1] == num:
+            self._mins.pop()
+        return num
 
     def top(self):
         return self._stack[-1]
 
     def min(self):
-        return min(self._stack)
+        return self._mins[-1]

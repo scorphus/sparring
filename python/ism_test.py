@@ -1,4 +1,6 @@
 import random
+import sys
+import time
 import unittest
 
 from ism import IntStackMin
@@ -79,3 +81,60 @@ class IntStackMinBasicTest(unittest.TestCase):
         unstacked = list(s)
 
         self.assertListEqual(unstacked, [2, 3, 1, 5, 4][::-1])
+
+    def test_can_min_after_pop(self):
+        s = IntStackMin()
+        for x in [2, 3, 1, 5, 4, 1]:
+            s.push(x)
+
+        s.pop()
+        num = s.min()
+
+        self.assertEqual(num, 1)
+
+
+class IntStackMinTimeEfficiencyTest(unittest.TestCase):
+
+    range_max = 262144
+    val_max = 2147483647
+
+    @classmethod
+    def setUpClass(cls):
+        sys.stdout.write('Setting up class...\n')
+        cls.s = IntStackMin()
+        for _ in range(cls.range_max):
+            cls.s.push(int(cls.val_max * random.random()))
+
+    def setUp(self):
+        self.start = time.time()
+
+    def asertIsFast(self):
+        spent = 1000 * (time.time() - self.start)  # time spent in milliseconds
+        sys.stdout.write('%0.3fms ' % spent)
+        sys.stdout.flush()
+        self.assertLess(spent, 0.1)
+
+    def test_len_is_fast(self):
+        len(self.s)
+        self.asertIsFast()
+
+    def test_push_is_fast(self):
+        self.s.push(1)
+        self.asertIsFast()
+
+    def test_pop_is_fast(self):
+        self.s.pop()
+        self.asertIsFast()
+
+    def test_top_is_fast(self):
+        self.s.top()
+        self.asertIsFast()
+
+    def test_min_is_fast(self):
+        self.s.min()
+        self.asertIsFast()
+
+    def test_builtin_len_isnt_fast(self):
+        min(self.s)
+        with self.assertRaises(AssertionError):
+            self.asertIsFast()
