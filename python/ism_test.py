@@ -138,3 +138,28 @@ class IntStackMinTimeEfficiencyTest(unittest.TestCase):
         min(self.s)
         with self.assertRaises(AssertionError):
             self.asertIsFast()
+
+
+class IntStackMinSafetyTest(unittest.TestCase):
+
+    def test_len_an_empty_stack(self):
+        s = IntStackMin()
+        self.assertEqual(len(s), 0)
+
+    def test_pop_from_empty_stack(self):
+        s = IntStackMin()
+        with self.assertRaises(ValueError) as e:
+            s.pop()
+        self.assertEqual(e.exception.args[0], 'empty sequence')
+
+    def test_top_from_empty_stack(self):
+        s = IntStackMin()
+        with self.assertRaises(ValueError) as e:
+            s.top()
+        self.assertEqual(e.exception.args[0], 'empty sequence')
+
+    def test_min_from_empty_stack(self):
+        s = IntStackMin()
+        with self.assertRaises(ValueError) as e:
+            s.min()
+        self.assertEqual(e.exception.args[0], 'empty sequence')

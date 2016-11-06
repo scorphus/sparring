@@ -16,13 +16,22 @@ class IntStackMin(object):
             self._mins.append(num)
 
     def pop(self):
-        num = self._stack.pop()
+        try:
+            num = self._stack.pop()
+        except IndexError:
+            raise ValueError('empty sequence')
         if self._mins[-1] == num:
             self._mins.pop()
         return num
 
     def top(self):
-        return self._stack[-1]
+        try:
+            return self._stack[-1]
+        except IndexError:
+            raise ValueError('empty sequence')
 
     def min(self):
-        return self._mins[-1]
+        try:
+            return self._mins[-1]
+        except IndexError:
+            raise ValueError('empty sequence')
