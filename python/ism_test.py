@@ -92,6 +92,15 @@ class IntStackMinBasicTest(unittest.TestCase):
 
         self.assertEqual(num, 1)
 
+    def test_can_push_full_pop_empty(self):
+        s = IntStackMin()
+        for x in [2, 3, 1, 5, 4, 1]:
+            s.push(x)
+        self.assertEqual(len(s), 6)
+        while len(s):
+            s.pop()
+        self.assertEqual(len(s), 0)
+
 
 class IntStackMinTimeEfficiencyTest(unittest.TestCase):
 
@@ -138,6 +147,28 @@ class IntStackMinTimeEfficiencyTest(unittest.TestCase):
         min(self.s)
         with self.assertRaises(AssertionError):
             self.asertIsFast()
+
+
+class IntStackMinMemoryEfficiencyTest(unittest.TestCase):
+
+    def test_push(self):
+        s = IntStackMin()
+        aux = list()
+        for _ in range(16):
+            n = 1 + int(16 * random.random())
+            s.push(n)
+            aux.append(n)
+        s_size = sys.getsizeof(s)
+        aux_size = sys.getsizeof(aux)
+        for _ in range(16):
+            n = -1 - int(16 * random.random())
+            s.push(n)
+            aux.append(n)
+        expected = sys.getsizeof(aux) - aux_size
+        increased = sys.getsizeof(s) - s_size
+        sys.stdout.write('{}B vs {}B '.format(increased, expected))
+        sys.stdout.flush()
+        self.assertEqual(increased, expected)
 
 
 class IntStackMinSafetyTest(unittest.TestCase):
