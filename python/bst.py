@@ -14,10 +14,10 @@ class Node(object):
         return self._cmp_key == node._cmp_key
 
     def _setitem(self, key, val):
-        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._key == key:
             self._val = val
             return 0
+        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._cmp_key > cmp_key:
             if not self._left:
                 self._left = Node(key, val, self, self._key_flat)
@@ -35,9 +35,9 @@ class Node(object):
         return self.keys()
 
     def _getitem(self, key):
-        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._key == key:
             return self
+        cmp_key = key if not self._key_flat else self._key_flat(key)
         if self._cmp_key > cmp_key and self._left:
             return self._left._getitem(key)
         if self._right:
