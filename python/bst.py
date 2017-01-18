@@ -179,6 +179,24 @@ class Node(object):
         predecessor = self._getitem(key)._predecessor()
         return predecessor._val if predecessor else None
 
+    def lca_key(self, key1, key2):
+        if self._key == key1 or self._key == key2:
+            return self._key
+        left_lca = self._left.lca_key(key1, key2) if self._left else None
+        right_lca = self._right.lca_key(key1, key2) if self._right else None
+        if left_lca and right_lca:
+            return self._key
+        return left_lca if left_lca is not None else right_lca
+
+    def lca_val(self, key1, key2):
+        if self._key == key1 or self._key == key2:
+            return self._val
+        left_lca = self._left.lca_val(key1, key2) if self._left else None
+        right_lca = self._right.lca_val(key1, key2) if self._right else None
+        if left_lca and right_lca:
+            return self._val
+        return left_lca if left_lca is not None else right_lca
+
 
 class BinarySearchTree(object):
 
@@ -256,3 +274,13 @@ class BinarySearchTree(object):
             return self._root_or_value_error[key]
         except (KeyError, ValueError):
             return default
+
+    def lca_key(self, key1, key2):
+        if self._root:
+            return self._root.lca_key(key1, key2)
+        return None
+
+    def lca_val(self, key1, key2):
+        if self._root:
+            return self._root.lca_val(key1, key2)
+        return None

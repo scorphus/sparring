@@ -285,6 +285,12 @@ class NumericBinarySearchTreeTestCase(unittest.TestCase):
     def test_can_iterate(self):
         self.assertListEqual(list(self.t), self.check)
 
+    def test_lca_key(self):
+        self.assertEqual(self.t.lca_key(1, 6), 3)
+
+    def test_lca_val(self):
+        self.assertEqual(self.t.lca_val(1, 6), 9)
+
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):
 
