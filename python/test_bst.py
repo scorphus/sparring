@@ -291,6 +291,18 @@ class NumericBinarySearchTreeTestCase(unittest.TestCase):
     def test_lca_val(self):
         self.assertEqual(self.t.lca_val(1, 6), 9)
 
+    def test_distance(self):
+        lca_key = self.t.lca_key(2, 7)
+        self.assertEqual(lca_key, 3)
+        dist_2 = self.t.distance(lca_key, 2)
+        self.assertEqual(dist_2, 2)
+        dist_7 = self.t.distance(lca_key, 7)
+        self.assertEqual(dist_7, 2)
+        dist_2_7 = self.t.distance(2, 7)
+        self.assertEqual(dist_2_7, 4)
+        dist_7_17 = self.t.distance(7, 17)
+        self.assertEqual(dist_7_17, 7)
+
 
 class BinarySearchTreeMassiveTestCase(unittest.TestCase):
 

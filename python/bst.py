@@ -198,6 +198,16 @@ class Node(object):
         if lca:
             return lca._val
 
+    def distance(self, key):
+        if self._key == key:
+            return 0
+        cmp_key = key if not self._key_flat else self._key_flat(key)
+        if self._cmp_key > cmp_key and self._left:
+            return self._left.distance(key) + 1
+        if self._right:
+            return self._right.distance(key) + 1
+        return -1
+
 
 class BinarySearchTree(object):
 
@@ -285,3 +295,10 @@ class BinarySearchTree(object):
         if self._root:
             return self._root.lca_val(key1, key2)
         return None
+
+    def distance(self, key1, key2):
+        if self._root:
+            lca = self._root.lca(key1, key2)
+            if lca:
+                return lca.distance(key1) + lca.distance(key2)
+        return -1
