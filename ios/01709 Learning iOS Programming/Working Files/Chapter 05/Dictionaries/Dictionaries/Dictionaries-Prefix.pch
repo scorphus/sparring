@@ -1,0 +1,20 @@
+//
+// Prefix header for all source files of the 'String' target in the 'String' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+
+typedef void(^LogBlock)(void);
+
+static void logh(NSString *header, LogBlock logBlock) { 
+    printf("== %s ==\n", [header cStringUsingEncoding:NSUTF8StringEncoding]);
+    logBlock();
+    printf("\n");
+}
+
+static void logs(NSString *str) {
+    printf("> '%s'\n", [str cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+#endif

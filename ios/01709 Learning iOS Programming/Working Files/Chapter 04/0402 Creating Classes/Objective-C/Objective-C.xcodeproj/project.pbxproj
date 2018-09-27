@@ -1,0 +1,237 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F98897E7154CE16800DFF107 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98897E6154CE16800DFF107 /* Foundation.framework */; };
+		F98897EA154CE16800DFF107 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F98897E9154CE16800DFF107 /* main.m */; };
+		F98897F6154CE1B700DFF107 /* MainApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F98897F5154CE1B700DFF107 /* MainApp.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F98897E0154CE16800DFF107 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F98897E2154CE16800DFF107 /* Objective-C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Objective-C"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F98897E6154CE16800DFF107 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F98897E9154CE16800DFF107 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F98897EC154CE16800DFF107 /* Objective-C-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-C-Prefix.pch"; sourceTree = "<group>"; };
+		F98897F4154CE1B700DFF107 /* MainApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainApp.h; sourceTree = "<group>"; };
+		F98897F5154CE1B700DFF107 /* MainApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainApp.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F98897DF154CE16800DFF107 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F98897E7154CE16800DFF107 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F98897D7154CE16800DFF107 = {
+			isa = PBXGroup;
+			children = (
+				F98897E8154CE16800DFF107 /* Objective-C */,
+				F98897E5154CE16800DFF107 /* Frameworks */,
+				F98897E3154CE16800DFF107 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F98897E3154CE16800DFF107 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F98897E2154CE16800DFF107 /* Objective-C */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F98897E5154CE16800DFF107 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F98897E6154CE16800DFF107 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F98897E8154CE16800DFF107 /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				F98897F5154CE1B700DFF107 /* MainApp.m */,
+				F98897EB154CE16800DFF107 /* Supporting Files */,
+			);
+			path = "Objective-C";
+			sourceTree = "<group>";
+		};
+		F98897EB154CE16800DFF107 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F98897E9154CE16800DFF107 /* main.m */,
+				F98897F4154CE1B700DFF107 /* MainApp.h */,
+				F98897EC154CE16800DFF107 /* Objective-C-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F98897E1154CE16800DFF107 /* Objective-C */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F98897F1154CE16800DFF107 /* Build configuration list for PBXNativeTarget "Objective-C" */;
+			buildPhases = (
+				F98897DE154CE16800DFF107 /* Sources */,
+				F98897DF154CE16800DFF107 /* Frameworks */,
+				F98897E0154CE16800DFF107 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Objective-C";
+			productName = "Objective-C";
+			productReference = F98897E2154CE16800DFF107 /* Objective-C */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F98897D9154CE16800DFF107 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = F98897DC154CE16800DFF107 /* Build configuration list for PBXProject "Objective-C" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F98897D7154CE16800DFF107;
+			productRefGroup = F98897E3154CE16800DFF107 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F98897E1154CE16800DFF107 /* Objective-C */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F98897DE154CE16800DFF107 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F98897EA154CE16800DFF107 /* main.m in Sources */,
+				F98897F6154CE1B700DFF107 /* MainApp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F98897EF154CE16800DFF107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F98897F0154CE16800DFF107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F98897F2154CE16800DFF107 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Objective-C/Objective-C-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F98897F3154CE16800DFF107 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Objective-C/Objective-C-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F98897DC154CE16800DFF107 /* Build configuration list for PBXProject "Objective-C" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F98897EF154CE16800DFF107 /* Debug */,
+				F98897F0154CE16800DFF107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F98897F1154CE16800DFF107 /* Build configuration list for PBXNativeTarget "Objective-C" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F98897F2154CE16800DFF107 /* Debug */,
+				F98897F3154CE16800DFF107 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F98897D9154CE16800DFF107 /* Project object */;
+}

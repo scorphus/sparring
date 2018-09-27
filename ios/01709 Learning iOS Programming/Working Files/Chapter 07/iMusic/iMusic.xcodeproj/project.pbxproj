@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F925E6DC156836F6008D8E93 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925E6DA156836F6008D8E93 /* AboutViewController.m */; };
+		F925E6DD156836F6008D8E93 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925E6DA156836F6008D8E93 /* AboutViewController.m */; };
+		F925E6DE156836F6008D8E93 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925E6DB156836F6008D8E93 /* AboutView.xib */; };
+		F925E6DF156836F6008D8E93 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925E6DB156836F6008D8E93 /* AboutView.xib */; };
+		F9A41A731565FDE4009B4863 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A721565FDE4009B4863 /* UIKit.framework */; };
+		F9A41A751565FDE4009B4863 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A741565FDE4009B4863 /* Foundation.framework */; };
+		F9A41A771565FDE4009B4863 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A761565FDE4009B4863 /* CoreGraphics.framework */; };
+		F9A41A7D1565FDE4009B4863 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F9A41A7B1565FDE4009B4863 /* InfoPlist.strings */; };
+		F9A41A7F1565FDE4009B4863 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A41A7E1565FDE4009B4863 /* main.m */; };
+		F9A41A831565FDE4009B4863 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A41A821565FDE4009B4863 /* AppDelegate.m */; };
+		F9A41A8B1565FDE4009B4863 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A8A1565FDE4009B4863 /* SenTestingKit.framework */; };
+		F9A41A8C1565FDE4009B4863 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A721565FDE4009B4863 /* UIKit.framework */; };
+		F9A41A8D1565FDE4009B4863 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A41A741565FDE4009B4863 /* Foundation.framework */; };
+		F9A41A951565FDE4009B4863 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F9A41A931565FDE4009B4863 /* InfoPlist.strings */; };
+		F9A41A981565FDE4009B4863 /* iMusicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A41A971565FDE4009B4863 /* iMusicTests.m */; };
+		F9A41AA31565FEC2009B4863 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A41AA21565FEC2009B4863 /* MainViewController.m */; };
+		F9A41AA41565FEC2009B4863 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A41AA21565FEC2009B4863 /* MainViewController.m */; };
+		F9A41AA61565FF32009B4863 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A41AA51565FF32009B4863 /* MainView.xib */; };
+		F9A41AA71565FF32009B4863 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A41AA51565FF32009B4863 /* MainView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F9A41A8E1565FDE4009B4863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9A41A651565FDE4009B4863 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9A41A6D1565FDE4009B4863;
+			remoteInfo = iMusic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F925E6D9156836F6008D8E93 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AboutViewController.h; sourceTree = "<group>"; };
+		F925E6DA156836F6008D8E93 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		F925E6DB156836F6008D8E93 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		F9A41A6E1565FDE4009B4863 /* iMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A41A721565FDE4009B4863 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F9A41A741565FDE4009B4863 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F9A41A761565FDE4009B4863 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F9A41A7A1565FDE4009B4863 /* iMusic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iMusic-Info.plist"; sourceTree = "<group>"; };
+		F9A41A7C1565FDE4009B4863 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F9A41A7E1565FDE4009B4863 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F9A41A801565FDE4009B4863 /* iMusic-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMusic-Prefix.pch"; sourceTree = "<group>"; };
+		F9A41A811565FDE4009B4863 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F9A41A821565FDE4009B4863 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F9A41A891565FDE4009B4863 /* iMusicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMusicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A41A8A1565FDE4009B4863 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F9A41A921565FDE4009B4863 /* iMusicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iMusicTests-Info.plist"; sourceTree = "<group>"; };
+		F9A41A941565FDE4009B4863 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F9A41A961565FDE4009B4863 /* iMusicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iMusicTests.h; sourceTree = "<group>"; };
+		F9A41A971565FDE4009B4863 /* iMusicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iMusicTests.m; sourceTree = "<group>"; };
+		F9A41AA11565FEC2009B4863 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F9A41AA21565FEC2009B4863 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F9A41AA51565FF32009B4863 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F9A41A6B1565FDE4009B4863 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A731565FDE4009B4863 /* UIKit.framework in Frameworks */,
+				F9A41A751565FDE4009B4863 /* Foundation.framework in Frameworks */,
+				F9A41A771565FDE4009B4863 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9A41A851565FDE4009B4863 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A8B1565FDE4009B4863 /* SenTestingKit.framework in Frameworks */,
+				F9A41A8C1565FDE4009B4863 /* UIKit.framework in Frameworks */,
+				F9A41A8D1565FDE4009B4863 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F9A41A631565FDE4009B4863 = {
+			isa = PBXGroup;
+			children = (
+				F9A41A781565FDE4009B4863 /* iMusic */,
+				F9A41A901565FDE4009B4863 /* iMusicTests */,
+				F9A41A711565FDE4009B4863 /* Frameworks */,
+				F9A41A6F1565FDE4009B4863 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F9A41A6F1565FDE4009B4863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A6E1565FDE4009B4863 /* iMusic.app */,
+				F9A41A891565FDE4009B4863 /* iMusicTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F9A41A711565FDE4009B4863 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A721565FDE4009B4863 /* UIKit.framework */,
+				F9A41A741565FDE4009B4863 /* Foundation.framework */,
+				F9A41A761565FDE4009B4863 /* CoreGraphics.framework */,
+				F9A41A8A1565FDE4009B4863 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F9A41A781565FDE4009B4863 /* iMusic */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A811565FDE4009B4863 /* AppDelegate.h */,
+				F9A41A821565FDE4009B4863 /* AppDelegate.m */,
+				F9A41A791565FDE4009B4863 /* Supporting Files */,
+				F9A41AA11565FEC2009B4863 /* MainViewController.h */,
+				F9A41AA21565FEC2009B4863 /* MainViewController.m */,
+				F9A41AA51565FF32009B4863 /* MainView.xib */,
+				F925E6D9156836F6008D8E93 /* AboutViewController.h */,
+				F925E6DA156836F6008D8E93 /* AboutViewController.m */,
+				F925E6DB156836F6008D8E93 /* AboutView.xib */,
+			);
+			path = iMusic;
+			sourceTree = "<group>";
+		};
+		F9A41A791565FDE4009B4863 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A7A1565FDE4009B4863 /* iMusic-Info.plist */,
+				F9A41A7B1565FDE4009B4863 /* InfoPlist.strings */,
+				F9A41A7E1565FDE4009B4863 /* main.m */,
+				F9A41A801565FDE4009B4863 /* iMusic-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F9A41A901565FDE4009B4863 /* iMusicTests */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A961565FDE4009B4863 /* iMusicTests.h */,
+				F9A41A971565FDE4009B4863 /* iMusicTests.m */,
+				F9A41A911565FDE4009B4863 /* Supporting Files */,
+			);
+			path = iMusicTests;
+			sourceTree = "<group>";
+		};
+		F9A41A911565FDE4009B4863 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F9A41A921565FDE4009B4863 /* iMusicTests-Info.plist */,
+				F9A41A931565FDE4009B4863 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F9A41A6D1565FDE4009B4863 /* iMusic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9A41A9B1565FDE4009B4863 /* Build configuration list for PBXNativeTarget "iMusic" */;
+			buildPhases = (
+				F9A41A6A1565FDE4009B4863 /* Sources */,
+				F9A41A6B1565FDE4009B4863 /* Frameworks */,
+				F9A41A6C1565FDE4009B4863 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iMusic;
+			productName = iMusic;
+			productReference = F9A41A6E1565FDE4009B4863 /* iMusic.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9A41A881565FDE4009B4863 /* iMusicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9A41A9E1565FDE4009B4863 /* Build configuration list for PBXNativeTarget "iMusicTests" */;
+			buildPhases = (
+				F9A41A841565FDE4009B4863 /* Sources */,
+				F9A41A851565FDE4009B4863 /* Frameworks */,
+				F9A41A861565FDE4009B4863 /* Resources */,
+				F9A41A871565FDE4009B4863 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9A41A8F1565FDE4009B4863 /* PBXTargetDependency */,
+			);
+			name = iMusicTests;
+			productName = iMusicTests;
+			productReference = F9A41A891565FDE4009B4863 /* iMusicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F9A41A651565FDE4009B4863 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "TapHarmonic, LLC";
+			};
+			buildConfigurationList = F9A41A681565FDE4009B4863 /* Build configuration list for PBXProject "iMusic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F9A41A631565FDE4009B4863;
+			productRefGroup = F9A41A6F1565FDE4009B4863 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F9A41A6D1565FDE4009B4863 /* iMusic */,
+				F9A41A881565FDE4009B4863 /* iMusicTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F9A41A6C1565FDE4009B4863 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A7D1565FDE4009B4863 /* InfoPlist.strings in Resources */,
+				F9A41AA61565FF32009B4863 /* MainView.xib in Resources */,
+				F925E6DE156836F6008D8E93 /* AboutView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9A41A861565FDE4009B4863 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A951565FDE4009B4863 /* InfoPlist.strings in Resources */,
+				F9A41AA71565FF32009B4863 /* MainView.xib in Resources */,
+				F925E6DF156836F6008D8E93 /* AboutView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F9A41A871565FDE4009B4863 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F9A41A6A1565FDE4009B4863 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A7F1565FDE4009B4863 /* main.m in Sources */,
+				F9A41A831565FDE4009B4863 /* AppDelegate.m in Sources */,
+				F9A41AA31565FEC2009B4863 /* MainViewController.m in Sources */,
+				F925E6DC156836F6008D8E93 /* AboutViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9A41A841565FDE4009B4863 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9A41A981565FDE4009B4863 /* iMusicTests.m in Sources */,
+				F9A41AA41565FEC2009B4863 /* MainViewController.m in Sources */,
+				F925E6DD156836F6008D8E93 /* AboutViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F9A41A8F1565FDE4009B4863 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9A41A6D1565FDE4009B4863 /* iMusic */;
+			targetProxy = F9A41A8E1565FDE4009B4863 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F9A41A7B1565FDE4009B4863 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9A41A7C1565FDE4009B4863 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F9A41A931565FDE4009B4863 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9A41A941565FDE4009B4863 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F9A41A991565FDE4009B4863 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F9A41A9A1565FDE4009B4863 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F9A41A9C1565FDE4009B4863 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iMusic/iMusic-Prefix.pch";
+				INFOPLIST_FILE = "iMusic/iMusic-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F9A41A9D1565FDE4009B4863 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iMusic/iMusic-Prefix.pch";
+				INFOPLIST_FILE = "iMusic/iMusic-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F9A41A9F1565FDE4009B4863 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iMusic.app/iMusic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iMusic/iMusic-Prefix.pch";
+				INFOPLIST_FILE = "iMusicTests/iMusicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F9A41AA01565FDE4009B4863 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iMusic.app/iMusic";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iMusic/iMusic-Prefix.pch";
+				INFOPLIST_FILE = "iMusicTests/iMusicTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F9A41A681565FDE4009B4863 /* Build configuration list for PBXProject "iMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9A41A991565FDE4009B4863 /* Debug */,
+				F9A41A9A1565FDE4009B4863 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9A41A9B1565FDE4009B4863 /* Build configuration list for PBXNativeTarget "iMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9A41A9C1565FDE4009B4863 /* Debug */,
+				F9A41A9D1565FDE4009B4863 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9A41A9E1565FDE4009B4863 /* Build configuration list for PBXNativeTarget "iMusicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9A41A9F1565FDE4009B4863 /* Debug */,
+				F9A41AA01565FDE4009B4863 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F9A41A651565FDE4009B4863 /* Project object */;
+}
