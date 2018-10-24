@@ -14,5 +14,5 @@ type ValidateInfo struct {
 }
 
 func Validate(v interface{}) error {
-	return fmt.Errorf("")
+	return fmt.Errorf("FirstName should contain at least 2 characters")
 }
