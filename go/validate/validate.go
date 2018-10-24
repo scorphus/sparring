@@ -1,5 +1,9 @@
 package validate
 
+import (
+	"fmt"
+)
+
 type Validator func(v interface{}, i ValidateInfo) error
 
 type ValidateInfo struct {
@@ -10,5 +14,5 @@ type ValidateInfo struct {
 }
 
 func Validate(v interface{}) error {
-	return nil
+	return fmt.Errorf("")
 }

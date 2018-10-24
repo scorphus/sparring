@@ -1,7 +1,9 @@
 package validate_test
 
-import "testing"
-import "validate"
+import (
+	"testing"
+	"validate"
+)
 
 type User struct {
 	Firstname      string `json:"first_name" validateType:"text" validateMinLen:"2"`
@@ -12,9 +14,9 @@ type User struct {
 }
 
 func TestValidateName(t *testing.T) {
-	u := User{Firstname: "John"}
+	u := User{Firstname: "J"}
 	err := validate.Validate(u)
-	if err != nil {
-		t.Fatalf("Unexpected error: %s", err)
+	if err == nil {
+		t.Fatal("Validate should err!")
 	}
 }
