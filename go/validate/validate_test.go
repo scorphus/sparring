@@ -13,13 +13,26 @@ type User struct {
 	SocialSecurity string `json:"ssn" validateType:"specific" validateTags:"ssn"`
 }
 
-func TestValidateName(t *testing.T) {
+func TestValidateFirstName(t *testing.T) {
 	u := User{FirstName: "J"}
 	err := validate.Validate(u)
 	if err == nil {
 		t.Fatal("Validate should err!")
 	}
-	if err.Error() != "FirstName should contain at least 2 characters" {
-		t.Fatalf("Unexpected error: %s", err)
+	expectedError := "FirstName should contain at least 2 characters"
+	if err.Error() != expectedError {
+		t.Fatalf("Unexpected error!\n\tWant: %s\n\tHave: %s", expectedError, err)
+	}
+}
+
+func TestValidateLastName(t *testing.T) {
+	u := User{LastName: "D"}
+	err := validate.Validate(u)
+	if err == nil {
+		t.Fatal("Validate should err!")
+	}
+	expectedError := "LastName should contain at least 2 characters"
+	if err.Error() != expectedError {
+		t.Fatalf("Unexpected error!\n\tWant: %s\n\tHave: %s", expectedError, err)
 	}
 }
