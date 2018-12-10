@@ -4,4 +4,6 @@
 
 _“Turn your sparring into play – but always play seriously.”_ – Bruce Lee
 
-_“Only that man who has offered up himself entire to the blood of war, who has been to the floor of the pit and seen the horror in the round and learned at last that it speaks to his inmost heart, only that man can dance.”_ – The Judge
+_“Only that man who has offered up himself entire to the blood of war, who has
+been to the floor of the pit and seen the horror in the round and learned at
+last that it speaks to his inmost heart, only that man can dance.”_ – The Judge
