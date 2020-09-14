@@ -11,6 +11,12 @@ fn main() {
     let servo = serde_json::from_str::<Project>(r#"{"name": "Servo",}"#);
     println!("{:?}", servo);
 
+    let rust_name = match rust {
+        Ok(rust) => rust.name,
+        _ => unimplemented!(),
+    };
+    println!("rust project name: {}", rust_name);
+
     let xz = vec![3, 5, 9];
     println!("Last element of xz: {:?}", xz.last());
 
