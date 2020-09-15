@@ -7,6 +7,10 @@ struct Project {
 }
 
 fn main() {
+    let name = "My Project".to_string();
+    let my_project = Project { name };
+    println!("{:?}", my_project);
+
     let rust = serde_json::from_str::<Project>(r#"{"name": "Rust"}"#);
     println!("{:?}", rust);
     let servo = serde_json::from_str::<Project>(r#"{"name": "Servo",}"#);
