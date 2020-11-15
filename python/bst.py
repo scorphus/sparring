@@ -1,5 +1,4 @@
 class Node(object):
-
     def __init__(self, key, val, par, key_flattener):
         self._key = key
         self._cmp_key = key if not key_flattener else key_flattener(key)
@@ -56,7 +55,7 @@ class Node(object):
 
     @property
     def _is_root(self):
-        return hasattr(self._par, '_root')
+        return hasattr(self._par, "_root")
 
     def _disconnect(self):
         if self._is_root:
@@ -210,7 +209,6 @@ class Node(object):
 
 
 class BinarySearchTree(object):
-
     def __init__(self, key_flattener=None):
         self._root = None
         self._key_flat = key_flattener
@@ -219,7 +217,7 @@ class BinarySearchTree(object):
     def _root_or_value_error(self):
         if self._root:
             return self._root
-        raise ValueError('empty sequence')
+        raise ValueError("empty sequence")
 
     def _root_or_key_error(self, key):
         if self._root:

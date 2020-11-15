@@ -7,7 +7,6 @@ from ismm import IntStackMaxMin
 
 
 class IntStackMaxMinBasicTest(unittest.TestCase):
-
     def test_can_create(self):
         s = IntStackMaxMin()
         self.assertEqual(len(s), 0)
@@ -145,7 +144,7 @@ class IntStackMaxMinTimeEfficiencyTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        sys.stdout.write('Setting up class...\n')
+        sys.stdout.write("Setting up class...\n")
         cls.s = IntStackMaxMin()
         for _ in range(cls.range_max):
             cls.s.push(int(cls.val_max * random.random()))
@@ -155,7 +154,7 @@ class IntStackMaxMinTimeEfficiencyTest(unittest.TestCase):
 
     def asertIsFast(self):
         spent = 1000 * (time.time() - self.start)  # time spent in milliseconds
-        sys.stdout.write('%0.3fms ' % spent)
+        sys.stdout.write("%0.3fms " % spent)
         sys.stdout.flush()
         self.assertLess(spent, 0.1)
 
@@ -195,7 +194,6 @@ class IntStackMaxMinTimeEfficiencyTest(unittest.TestCase):
 
 
 class IntStackMaxMinMemoryEfficiencyTest(unittest.TestCase):
-
     def test_push(self):
         s = IntStackMaxMin()
         aux = list()
@@ -211,13 +209,12 @@ class IntStackMaxMinMemoryEfficiencyTest(unittest.TestCase):
             aux.append(n)
         expected = sys.getsizeof(aux) - aux_size
         increased = sys.getsizeof(s) - s_size
-        sys.stdout.write('{}B vs {}B '.format(increased, expected))
+        sys.stdout.write("{}B vs {}B ".format(increased, expected))
         sys.stdout.flush()
         self.assertEqual(increased, expected)
 
 
 class IntStackMaxMinSafetyTest(unittest.TestCase):
-
     def test_len_an_empty_stack(self):
         s = IntStackMaxMin()
         self.assertEqual(len(s), 0)
@@ -226,22 +223,22 @@ class IntStackMaxMinSafetyTest(unittest.TestCase):
         s = IntStackMaxMin()
         with self.assertRaises(ValueError) as e:
             s.pop()
-        self.assertEqual(e.exception.args[0], 'empty sequence')
+        self.assertEqual(e.exception.args[0], "empty sequence")
 
     def test_top_from_empty_stack(self):
         s = IntStackMaxMin()
         with self.assertRaises(ValueError) as e:
             s.top()
-        self.assertEqual(e.exception.args[0], 'empty sequence')
+        self.assertEqual(e.exception.args[0], "empty sequence")
 
     def test_max_from_empty_stack(self):
         s = IntStackMaxMin()
         with self.assertRaises(ValueError) as e:
             s.max()
-        self.assertEqual(e.exception.args[0], 'empty sequence')
+        self.assertEqual(e.exception.args[0], "empty sequence")
 
     def test_min_from_empty_stack(self):
         s = IntStackMaxMin()
         with self.assertRaises(ValueError) as e:
             s.min()
-        self.assertEqual(e.exception.args[0], 'empty sequence')
+        self.assertEqual(e.exception.args[0], "empty sequence")

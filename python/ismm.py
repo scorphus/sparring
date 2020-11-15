@@ -2,7 +2,6 @@ import sys
 
 
 class IntStackMaxMin(object):
-
     def __init__(self):
         self._stack = list()
         self._max = self._min = None
@@ -44,7 +43,7 @@ class IntStackMaxMin(object):
                 num, self._min = self._min, self._min - num
             return num
         except IndexError:
-            raise ValueError('empty sequence')
+            raise ValueError("empty sequence")
 
     def top(self):
         try:
@@ -55,14 +54,14 @@ class IntStackMaxMin(object):
                 num = self._min
             return num
         except IndexError:
-            raise ValueError('empty sequence')
+            raise ValueError("empty sequence")
 
     def max(self):
         if self._stack:
             return self._max
-        raise ValueError('empty sequence')
+        raise ValueError("empty sequence")
 
     def min(self):
         if self._stack:
             return self._min
-        raise ValueError('empty sequence')
+        raise ValueError("empty sequence")
