@@ -1,0 +1,7 @@
+(def cards '(10 :ace :jack 9))
+(println cards)
+(println (first cards))
+(println (rest cards))
+(println (peek cards))
+(println (pop cards))
+(println (conj cards :queen))
