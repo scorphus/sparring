@@ -2,11 +2,11 @@
      (map #(* % %))
      (take 13)
      (reduce +)
-     (#(println "First 13 square pyramidal numbers:" % "(https://oeis.org/A000330)")))
+     (printf "First 13 square pyramidal numbers: %d (https://oeis.org/A000330)\n"))
 
 (->> (range)
      (map #(* % %))
      (filter even?)
      (take 13)
      (reduce +)
-     (#(println "Sum of the first 13 even squares:" % "(https://oeis.org/A002492)")))
+     (printf "Sum of the first 13 even squares: %d (https://oeis.org/A002492)\n"))
