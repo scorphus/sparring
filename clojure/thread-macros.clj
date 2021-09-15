@@ -1,0 +1,12 @@
+(->> (range)
+     (map #(* % %))
+     (take 13)
+     (reduce +)
+     (#(println "First 13 square pyramidal numbers:" % "(https://oeis.org/A000330)")))
+
+(->> (range)
+     (map #(* % %))
+     (filter even?)
+     (take 13)
+     (reduce +)
+     (#(println "Sum of the first 13 even squares:" % "(https://oeis.org/A002492)")))
