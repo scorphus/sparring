@@ -10,8 +10,8 @@
 (println "nil is" (if nil :truthy :falsey))
 
 (if (even? 5)
-  (do (println "even"))
-  (do (println "odd")))
+  (println "even")
+  (println "odd"))
 
 (if (even? 5)
   (do (println "even")
