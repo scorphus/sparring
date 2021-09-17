@@ -26,24 +26,24 @@
 (def x -5)
 
 (println
-  (cond
-    (< x 2) "x is less than 2"
-    (< x 10) "x is less than 10"))
+ (cond
+   (< x 2) "x is less than 2"
+   (< x 10) "x is less than 10"))
 
 (def x 5)
 
 (println
-  (cond
-    (< x 2) "x is less than 2"
-    (< x 10) "x is less than 10"))
+ (cond
+   (< x 2) "x is less than 2"
+   (< x 10) "x is less than 10"))
 
 (def x 10)
 
 (println
-  (cond
-    (< x 2)  "x is less than 2"
-    (< x 10) "x is less than 10"
-    :else  "x is greater than or equal to 10"))
+ (cond
+   (< x 2)  "x is less than 2"
+   (< x 10) "x is less than 10"
+   :else  "x is greater than or equal to 10"))
 
 (when (neg? x)
   (throw (RuntimeException. (str "x must be positive: " x))))

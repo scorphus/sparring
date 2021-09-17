@@ -8,10 +8,10 @@
 
 ;; Map constructor - generated
 (def kelly (map->Person
-             {:first-name "Kelly"
-              :last-name "Keen"
-              :age 32
-              :occupation "Pro Cyclist"}))
+            {:first-name "Kelly"
+             :last-name "Keen"
+             :age 32
+             :occupation "Pro Cyclist"}))
 
 (println kelly)
 (println (:occupation kelly))

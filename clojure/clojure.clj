@@ -82,8 +82,8 @@
 
 (defn http-get [url]
   (slurp
-    (.openStream
-      (java.net.URL. url))))
+   (.openStream
+    (java.net.URL. url))))
 (println (http-get "https://api.ipify.org/"))
 
 (defn one-less-arg [f x]
