@@ -4,9 +4,9 @@
 (defn fib
   "Lazily generates Fibonacci numbers"
   ([]
-   (fib 0 1))
+   (fib 0N 1N))
   ([a b]
    (lazy-seq
     (cons a (fib b (+ a b))))))
 
-(println (take 20 (fib)))
+(println (take 100 (fib)))
