@@ -1,5 +1,5 @@
-(def scores {"Fred"  1400
-             "Bob"   1240
+(def scores {"Fred"   1400
+             "Bob"    1240
              "Angela" 1024})
 (println scores)
 
