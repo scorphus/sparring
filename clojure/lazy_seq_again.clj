@@ -24,6 +24,15 @@
     [0 -1] [(adj-se x y) (adj-ee x y) (adj-ne x y) (adj-nn x y)]
     [1  0] [(adj-ne x y) (adj-nn x y) (adj-nw x y) (adj-ww x y)]))
 
+(defn write
+  [{memory :memory square :square :as spiral-memory}]
+  (->>
+   (adjacency spiral-memory)
+   (map #(get memory % 0))
+   (reduce +)
+   (assoc memory square)
+   (assoc spiral-memory :memory)))
+
 (defn walk
   [{memory :memory
     {x :x y :y} :square
@@ -35,10 +44,6 @@
         steps (if should-turn 1 (inc steps))
         [dx dy] (if should-turn [(- dy) dx] [dx dy])]
     (make-spiral-memory memory (+ x dx) (+ y dy) dx dy next-turn steps)))
-
-(defn write
-  [{memory :memory
-    {x :x y :y} :square :as spiral-memory}] (identity spiral-memory))
 
 (defn write-next
   [spiral-memory] (write (walk spiral-memory)))
