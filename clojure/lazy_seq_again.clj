@@ -53,3 +53,9 @@
 (defn get-square-value [{memory :memory square :square}] (get memory square))
 
 (println (take 50 (map get-square-value (write-squares))))
+
+(def after-747 (first (for [{memory :memory square :square} (write-squares)
+                            :when (> (get memory square) 747)]
+                        (get memory square))))
+
+(assert (= after-747 806) (str "Actual: " after-747))
