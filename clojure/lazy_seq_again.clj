@@ -44,13 +44,12 @@
         [dx dy] (if should-turn [(- dy) dx] [dx dy])]
     (make-spiral-memory memory (+ x dx) (+ y dy) dx dy next-turn steps)))
 
-(defn write-next [spiral-memory] (write (walk spiral-memory)))
+(defn write-squares
+  ([]
+   (write-squares (make-spiral-memory)))
+  ([spiral-memory]
+   (lazy-seq (cons spiral-memory (write-squares (write (walk spiral-memory)))))))
 
-(defn write-until
-  ([predicate]
-   (write-until predicate (make-spiral-memory)))
-  ([predicate spiral-memory]
-   (lazy-seq
-    (cons spiral-memory (write-until predicate (write-next spiral-memory))))))
+(defn get-square-value [{memory :memory square :square}] (get memory square))
 
-(map println (take 25 (write-until "some predicate")))
+(println (take 50 (map get-square-value (write-squares))))
