@@ -1,9 +1,11 @@
 (defrecord Square [x y])
 (defrecord Delta [dx dy])
-(defrecord SpiralMemory [memory square delta steer-in dist])
+(defrecord SpiralMemory [memory square delta next-turn steps])
 
 (defn make-spiral-memory
-  [] (->SpiralMemory {(->Square 0 0) 1} (->Square 0 0) (->Delta 1 0) 1 0))
+  ([] (make-spiral-memory {(->Square 0 0) 1} 0 0 0 -1 0 0))
+  ([memory x y dx dy next-turn steps]
+   (->SpiralMemory memory (->Square x y) (->Delta dx dy) next-turn steps)))
 
 (defn adj-nn [x, y] (->Square      x  (inc y)))
 (defn adj-ne [x, y] (->Square (inc x) (inc y)))
@@ -23,8 +25,16 @@
     [1  0] [(adj-ne x y) (adj-nn x y) (adj-nw x y) (adj-ww x y)]))
 
 (defn walk
-  [{{x :x y :y} :square
-    {dx :dx dy :dy} :delta :as spiral-memory}] (identity spiral-memory))
+  [{memory :memory
+    {x :x y :y} :square
+    {dx :dx dy :dy} :delta
+    next-turn :next-turn
+    steps :steps}]
+  (let [should-turn (= steps next-turn)
+        next-turn (if (and should-turn (not (zero? dy))) (inc next-turn) next-turn)
+        steps (if should-turn 1 (inc steps))
+        [dx dy] (if should-turn [(- dy) dx] [dx dy])]
+    (make-spiral-memory memory (+ x dx) (+ y dy) dx dy next-turn steps)))
 
 (defn write
   [{memory :memory
@@ -40,5 +50,4 @@
    (lazy-seq
     (cons spiral-memory (write-until predicate (write-next spiral-memory))))))
 
-(prn (take 1 (write-until "some predicate")))
-(prn (take 2 (write-until "some predicate")))
+(map println (take 25 (write-until "some predicate")))
