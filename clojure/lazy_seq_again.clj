@@ -1,12 +1,12 @@
 (defrecord Square [x y])
 (defrecord Delta [dx dy])
-(defrecord SpiralMemory [memory square delta next-turn steps])
+(defrecord SpiralMemory [memory square delta])
 
 (defn make-spiral-memory
   ([]
-   (make-spiral-memory {(->Square 0 0) 1} 0 0 0 -1 0 0))
-  ([memory x y dx dy next-turn steps]
-   (->SpiralMemory memory (->Square x y) (->Delta dx dy) next-turn steps)))
+   (make-spiral-memory {(->Square 0 0) 1} 0 0 0 -1))
+  ([memory x y dx dy]
+   (->SpiralMemory memory (->Square x y) (->Delta dx dy))))
 
 (defn adj-nn [x, y] (->Square      x  (inc y)))
 (defn adj-ne [x, y] (->Square (inc x) (inc y)))
@@ -35,14 +35,12 @@
 (defn walk
   [{memory :memory
     {x :x y :y} :square
-    {dx :dx dy :dy} :delta
-    next-turn :next-turn
-    steps :steps}]
-  (let [should-turn (= steps next-turn)
-        next-turn (if (and should-turn (not (zero? dy))) (inc next-turn) next-turn)
-        steps (if should-turn 1 (inc steps))
+    {dx :dx dy :dy} :delta}]
+  (let [should-turn (or (= x y)
+                        (and (pos? y) (zero? (+ x y)))
+                        (and (<= y 0) (zero? (+ x y -1))))
         [dx dy] (if should-turn [(- dy) dx] [dx dy])]
-    (make-spiral-memory memory (+ x dx) (+ y dy) dx dy next-turn steps)))
+    (make-spiral-memory memory (+ x dx) (+ y dy) dx dy)))
 
 (defn write-squares
   ([]
