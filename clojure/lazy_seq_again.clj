@@ -17,14 +17,19 @@
 (defn adj-ww [x, y] (->Square (dec x)      y))
 (defn adj-nw [x, y] (->Square (dec x) (inc y)))
 
-(defn adjacency [{{x :x y :y} :square {dx :dx dy :dy} :delta}]
+(defn adjacency
+  [{{x :x y :y} :square
+    {dx :dx dy :dy} :delta}]
   (case [dx dy]
     [0  1] [(adj-nw x y) (adj-ww x y) (adj-sw x y) (adj-ss x y)]
     [-1 0] [(adj-sw x y) (adj-ss x y) (adj-se x y) (adj-ee x y)]
     [0 -1] [(adj-se x y) (adj-ee x y) (adj-ne x y) (adj-nn x y)]
     [1  0] [(adj-ne x y) (adj-nn x y) (adj-nw x y) (adj-ww x y)]))
 
-(defn write [{memory :memory square :square :as spiral-memory}]
+(defn write
+  [{memory :memory
+    square :square
+    :as spiral-memory}]
   (->>
    (adjacency spiral-memory)
    (map #(get memory % 0))
