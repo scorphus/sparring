@@ -8,14 +8,14 @@
   ([memory x y dx dy]
    (->SpiralMemory memory (->Square x y) (->Delta dx dy))))
 
-(defn adj-nn [x, y] (->Square      x  (inc y)))
-(defn adj-ne [x, y] (->Square (inc x) (inc y)))
-(defn adj-ee [x, y] (->Square (inc x)      y))
-(defn adj-se [x, y] (->Square (inc x) (dec y)))
-(defn adj-ss [x, y] (->Square      x  (dec y)))
-(defn adj-sw [x, y] (->Square (dec x) (dec y)))
-(defn adj-ww [x, y] (->Square (dec x)      y))
-(defn adj-nw [x, y] (->Square (dec x) (inc y)))
+(defn adj-nn [x y] (->Square      x  (inc y)))
+(defn adj-ne [x y] (->Square (inc x) (inc y)))
+(defn adj-ee [x y] (->Square (inc x)      y))
+(defn adj-se [x y] (->Square (inc x) (dec y)))
+(defn adj-ss [x y] (->Square      x  (dec y)))
+(defn adj-sw [x y] (->Square (dec x) (dec y)))
+(defn adj-ww [x y] (->Square (dec x)      y))
+(defn adj-nw [x y] (->Square (dec x) (inc y)))
 
 (defn adjacency
   [{{x :x y :y} :square
