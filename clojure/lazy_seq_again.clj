@@ -47,17 +47,17 @@
         [dx dy] (if should-turn [(- dy) dx] [dx dy])]
     (make-spiral-memory memory (+ x dx) (+ y dy) dx dy)))
 
-(defn write-squares
+(defn spiralize
   ([]
-   (write-squares (make-spiral-memory)))
+   (spiralize (make-spiral-memory)))
   ([spiral-memory]
-   (lazy-seq (cons spiral-memory (write-squares (write (walk spiral-memory)))))))
+   (lazy-seq (cons spiral-memory (spiralize (write (walk spiral-memory)))))))
 
 (defn get-square-value [{memory :memory square :square}] (get memory square))
 
-(println (take 50 (map get-square-value (write-squares))))
+(println (take 50 (map get-square-value (spiralize))))
 
-(def after-747 (first (for [{memory :memory square :square} (write-squares)
+(def after-747 (first (for [{memory :memory square :square} (spiralize)
                             :when (> (get memory square) 747)]
                         (get memory square))))
 
