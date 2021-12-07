@@ -4,7 +4,7 @@ with open("day-05.txt") as f:
     lines = f.read().rstrip().splitlines()
 
 diag = {}
-overlap = set()
+overlap = 0
 for fro, to in map(lambda x: x.split(" -> ", 1), lines):
     x1, y1 = map(int, fro.split(",", 1))
     x2, y2 = map(int, to.split(",", 1))
@@ -13,6 +13,6 @@ for fro, to in map(lambda x: x.split(" -> ", 1), lines):
             for y in range(min(y1, y2), max(y1, y2) + 1):
                 num = diag.get((x, y), 0) + 1
                 diag[(x, y)] = num
-                if num > 1:
-                    overlap.add((x, y))
-print(len(overlap))
+                if num == 2:
+                    overlap += 1
+print(overlap)
