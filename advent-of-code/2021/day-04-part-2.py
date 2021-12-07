@@ -1,6 +1,6 @@
 from itertools import product
 
-with open("aoc-2021-04.txt") as f:
+with open("day-04.txt") as f:
     numbers_str, *boards_str = f.read().rstrip().split("\n\n")
 
 numbers = [int(n) for n in numbers_str.split(",")]

@@ -1,6 +1,6 @@
 from itertools import product
 
-with open("aoc-2021-05.txt") as f:
+with open("day-05.txt") as f:
     lines = f.read().rstrip().splitlines()
 
 diag = {}

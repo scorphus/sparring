@@ -1,5 +1,5 @@
 set gamma ""
-set lines (cat aoc-2021-03.txt)
+set lines (cat day-03.txt)
 set bits (echo -n $lines[1] | wc -c)
 for x in (seq $bits)
   set c (for line in $lines

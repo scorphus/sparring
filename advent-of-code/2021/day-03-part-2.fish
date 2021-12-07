@@ -28,6 +28,6 @@ function determine_rating -a crit
   echo $numbers
 end
 
-set oxygen (determine_rating 1 (cat aoc-2021-03.txt))
-set scrubber (determine_rating 0 (cat aoc-2021-03.txt))
+set oxygen (determine_rating 1 (cat day-03.txt))
+set scrubber (determine_rating 0 (cat day-03.txt))
 echo "ibase=2; $oxygen * $scrubber" | bc
