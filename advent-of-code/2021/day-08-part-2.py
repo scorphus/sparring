@@ -1,24 +1,3 @@
-from functools import cache
-from itertools import permutations
-
-
-@cache
-def generate_digits(a, b, c, d, e, f, g):
-    digits = {
-        0: (a, b, c, e, f, g),
-        1: (c, f),
-        2: (a, c, d, e, g),
-        3: (a, c, d, f, g),
-        4: (b, c, d, f),
-        5: (a, b, d, f, g),
-        6: (a, b, d, e, f, g),
-        7: (a, c, f),
-        8: (a, b, c, d, e, f, g),
-        9: (a, b, c, d, f, g),
-    }
-    return {tuple(sorted(d)): v for v, d in digits.items()}
-
-
 with open("day-08.txt") as f:
     notes = [line.split(" | ") for line in f.read().rstrip().splitlines()]
 
@@ -28,12 +7,50 @@ for p, o in notes:
     patterns.append([tuple(sorted(s)) for s in p.split(maxsplit=9)])
     outputs.append([tuple(sorted(s)) for s in o.split(maxsplit=3)])
 
+
+def make_mask(digit):
+    mask = 0
+    for letter in digit:
+        mask |= 1 << (ord(letter) - ord("a"))
+    return mask
+
+
+masks = {}
 ans = 0
 for pat, out in zip(patterns, outputs):
-    for perm in permutations("abcdefg"):
-        digits = generate_digits(*perm)
-        if all(p in digits for p in pat):
-            ans += sum(digits[d] * 10 ** (3 - i) for i, d in enumerate(out))
-            break
-
+    for digit in pat:
+        mask = make_mask(digit)
+        if len(digit) == 2:
+            masks[1] = mask
+        elif len(digit) == 3:
+            masks[7] = mask
+        elif len(digit) == 4:
+            masks[4] = mask
+        elif len(digit) == 7:
+            masks[8] = mask
+    for i, digit in enumerate(out):
+        num = 0
+        if len(digit) == 2:
+            num = 1
+        elif len(digit) == 3:
+            num = 7
+        elif len(digit) == 4:
+            num = 4
+        elif len(digit) == 7:
+            num = 8
+        else:
+            mask = make_mask(digit)
+            if len(digit) == 5:
+                if mask & masks[7] == masks[7]:
+                    num = 3
+                elif mask | masks[7] | masks[4] == masks[8]:
+                    num = 2
+                else:
+                    num = 5
+            else:
+                if mask & masks[4] == masks[4]:
+                    num = 9
+                elif mask & masks[4] & masks[7] != masks[1]:
+                    num = 6
+        ans += num * 10 ** (3 - i)
 print(ans)
