@@ -18,7 +18,7 @@ for i in range(len(heatmap)):
 sizes = [0, 0, 0]
 for start in starts:
     stack = {start}
-    seen = {start}
+    size = 0
     while stack:
         i, j = stack.pop()
         n = heatmap[i][j]
@@ -28,12 +28,11 @@ for start in starts:
                 and y >= 0
                 and x < len(heatmap)
                 and y < len(heatmap[i])
-                and 9 > heatmap[x][y] > heatmap[i][j]
-                and (x, y) not in seen
+                and heatmap[x][y] < 9
             ):
+                heatmap[x][y] = 9
                 stack.add((x, y))
-                seen.add((x, y))
-    size = len(seen)
+                size += 1
     if size > sizes[0]:
         heapq.heapreplace(sizes, size)
 
