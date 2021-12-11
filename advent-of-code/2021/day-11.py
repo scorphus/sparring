@@ -1,9 +1,11 @@
 from collections import deque
+import os
+import sys
+import time
 
 with open("day-11.txt") as f:
     lines = list(map(lambda l: list(map(int, l)), f.read().splitlines()))
 
-size = len(lines)
 grid = {}
 for i, row in enumerate(lines):
     for j, energy in enumerate(row):
@@ -51,10 +53,15 @@ def reset_flashed(flashed, grid):
 def represent(grid):
     grid_repr = [[" " for _ in range(size)] for _ in range(size)]
     for i, j in grid:
-        grid_repr[i][j] = str(grid[i, j]) if grid[i, j] else "█"
+        grid_repr[i][j] = "🐙" if grid[i, j] else "🌟"
     return "\n".join(["".join(row) for row in grid_repr])
 
 
+size = len(lines)
+term_cols, term_lines = os.get_terminal_size()
+animate = float(
+    next((a.split("=")[1] for a in sys.argv if a.startswith("--animate=")), 0)
+)
 steps = 0
 ans1 = 0
 ans2 = 0
@@ -68,11 +75,20 @@ while True:
     if steps < 100:
         ans1 += len(flashed)
     reset_flashed(flashed, grid)
-    if len(flashed) == size * size:
-        ans2 = steps + 1
-        break
     steps += 1
+    if animate:
+        print(
+            "\n" * (term_lines - size + 1)
+            + represent(grid)
+            + " " * (term_cols - 2 * size),
+            end="",
+        )
+        time.sleep(animate)
+    if len(flashed) == size * size:
+        ans2 = steps
+        break
 
-print(represent(grid))
+if animate:
+    print()
 print("Part 1:", ans1)
 print("Part 2:", ans2)
