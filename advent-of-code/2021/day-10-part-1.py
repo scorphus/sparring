@@ -2,9 +2,9 @@ with open("day-10.txt") as f:
     nav_sys = f.read().rstrip().splitlines()
 
 pairs = {
-    "}": "{",
-    "]": "[",
     ")": "(",
+    "]": "[",
+    "}": "{",
     ">": "<",
 }
 
