@@ -24,24 +24,34 @@ DELTAS = (
 )
 
 
-def flashers_round(grid, energy_map):
-    flashers = energy_map.get(10, deque([]))
+def energy_levels(grid):
+    flashers = deque([])
+    for (i, j), energy in grid.items():
+        energy += 1
+        grid[i, j] = energy
+        if energy == 10:
+            flashers.append((i, j))
+    return flashers
+
+
+def flashers_round(grid, flashers):
     flashed = set(flashers)
     while flashers:
         i, j = flashers.popleft()
         for di, dj in DELTAS:
             ni, nj = i + di, j + dj
-            if (ni, nj) in flashed or (ni, nj) not in grid or grid[ni, nj] > 10:
+            if (ni, nj) in flashed or (ni, nj) not in grid:
                 continue
-            energy = grid[ni, nj]
-            energy_map[energy].remove((ni, nj))
             grid[ni, nj] += 1
-            if energy == 9:
+            if grid[ni, nj] == 10:
                 flashers.append((ni, nj))
                 flashed.add((ni, nj))
-            elif energy < 9:
-                energy_map.setdefault(energy + 1, deque([])).append((ni, nj))
     return flashed
+
+
+def step(grid):
+    flashers = energy_levels(grid)
+    return flashers_round(grid, flashers)
 
 
 def reset_flashed(flashed, grid):
@@ -56,33 +66,27 @@ def represent(grid):
     return "\n".join(["".join(row) for row in grid_repr])
 
 
+def do_animation(grid, size, animate):
+    cols, lines = os.get_terminal_size()
+    print("\n" * (lines - size + 1) + represent(grid) + " " * (cols - 2 * size), end="")
+    time.sleep(animate)
+
+
 size = len(lines)
-term_cols, term_lines = os.get_terminal_size()
 animate = float(
     next((a.split("=")[1] for a in sys.argv if a.startswith("--animate=")), 0)
 )
-steps = 0
 ans1 = 0
 ans2 = 0
+steps = 0
 while True:
-    energy_map = {}
-    for (i, j), energy in grid.items():
-        energy += 1
-        grid[i, j] = energy
-        energy_map.setdefault(energy, deque([])).append((i, j))
-    flashed = flashers_round(grid, energy_map)
+    flashed = step(grid)
     if steps < 100:
         ans1 += len(flashed)
     reset_flashed(flashed, grid)
     steps += 1
     if animate:
-        print(
-            "\n" * (term_lines - size + 1)
-            + represent(grid)
-            + " " * (term_cols - 2 * size),
-            end="",
-        )
-        time.sleep(animate)
+        do_animation(grid, size, animate)
     if len(flashed) == size * size:
         ans2 = steps
         break
