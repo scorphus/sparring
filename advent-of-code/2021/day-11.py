@@ -28,20 +28,19 @@ def flashers_round(grid, energy_map):
     flashers = energy_map.get(10, deque([]))
     flashed = set(flashers)
     while flashers:
-        while flashers:
-            i, j = flashers.popleft()
-            for di, dj in DELTAS:
-                ni, nj = i + di, j + dj
-                if (ni, nj) in flashed or (ni, nj) not in grid or grid[ni, nj] > 10:
-                    continue
-                energy = grid[ni, nj]
-                energy_map[energy].remove((ni, nj))
-                grid[ni, nj] += 1
-                if energy == 9:
-                    flashers.append((ni, nj))
-                    flashed.add((ni, nj))
-                elif energy < 9:
-                    energy_map.setdefault(energy + 1, deque([])).append((ni, nj))
+        i, j = flashers.popleft()
+        for di, dj in DELTAS:
+            ni, nj = i + di, j + dj
+            if (ni, nj) in flashed or (ni, nj) not in grid or grid[ni, nj] > 10:
+                continue
+            energy = grid[ni, nj]
+            energy_map[energy].remove((ni, nj))
+            grid[ni, nj] += 1
+            if energy == 9:
+                flashers.append((ni, nj))
+                flashed.add((ni, nj))
+            elif energy < 9:
+                energy_map.setdefault(energy + 1, deque([])).append((ni, nj))
     return flashed
 
 
