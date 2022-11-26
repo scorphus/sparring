@@ -39,6 +39,6 @@
   (define suite
     (test-suite "day 3 tests"
                 (test-equal? "part 1 with sample input" (part-1 sample) 3)
-                (test-equal? "part 1 with sample input" (part-2 sample) 6)))
+                (test-equal? "part 2 with sample input" (part-2 sample) 6)))
 
   (run-tests suite))

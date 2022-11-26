@@ -44,5 +44,5 @@
   (define suite
     (test-suite "day 5 tests"
                 (test-equal? "part 1 with sample input" (part-1 "abc") "18f47a30")
-                (test-equal? "part 1 with sample input" (part-2 "abc") "05ace8e3")))
+                (test-equal? "part 2 with sample input" (part-2 "abc") "05ace8e3")))
   (run-tests suite))
