@@ -5,11 +5,9 @@
          racket/string)
 
 (module* main #f
-  (define lines (file->lines "day04.txt"))
-  (printf "part 1: ")
-  (part-1 lines)
-  (printf "part 2: ")
-  (part-2 lines "northpoleobjects"))
+  (let ([lines (file->lines "day04.txt")])
+    (printf "part 1: ~a~n" (part-1 lines))
+    (printf "part 2: ~a~n" (part-2 lines "northpoleobjects"))))
 
 (define (part-1 lines)
   (for/sum ([room (map parse-room lines)])
@@ -24,12 +22,12 @@
   (reverse (string-split (string-replace line #rx"[][-]+" " "))))
 
 (define (is-real-room room)
-  (define checksum (car room))
-  (define name (string-join (cdr (cdr room)) ""))
-  (define letter-freq (count-letters name))
-  (define sorted-letter-freq (sort (hash->list letter-freq) sort-letter-frequency))
-  (define name-checksum (map car (take sorted-letter-freq 5)))
-  (equal? (list->string name-checksum) checksum))
+  (let* ([checksum (car room)]
+         [name (string-join (cdr (cdr room)) "")]
+         [letter-freq (count-letters name)]
+         [sorted-letter-freq (sort (hash->list letter-freq) sort-letter-frequency)]
+         [name-checksum (map car (take sorted-letter-freq 5))])
+    (equal? (list->string name-checksum) checksum)))
 
 (define (count-letters string)
   (for/fold ([count-map #hash()] #:result count-map) ([c (string->list string)])
@@ -39,10 +37,10 @@
   (if (= (cdr s) (cdr t)) (char<? (car s) (car t)) (> (cdr s) (cdr t))))
 
 (define (room-contains room lookup)
-  (define sector-id (string->number (car (cdr room))))
-  (define name (string-join (reverse (cdr (cdr room))) ""))
-  (define decrypted-name (rotate name sector-id))
-  (string-contains? decrypted-name lookup))
+  (let* ([name (string-join (reverse (cdr (cdr room))) "")]
+         [sector-id (string->number (car (cdr room)))]
+         [decrypted-name (rotate name sector-id)])
+    (string-contains? decrypted-name lookup)))
 
 (define (rotate string n)
   (list->string (map (λ (c) (rotate-char c n)) (string->list string))))

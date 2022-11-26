@@ -4,28 +4,24 @@
          racket/string)
 
 (module* main #f
-  (define lines (file->lines "day03.txt"))
-  (printf "part 1: ")
-  (part-1 lines)
-  (printf "part 2: ")
-  (part-2 lines))
+  (let ([lines (file->lines "day03.txt")])
+    (printf "part 1: ~a~n" (part-1 lines))
+    (printf "part 2: ~a~n" (part-2 lines))))
 
 (define (part-1 lines)
-  (for/sum ([l lines]) (define-values (a b c) (parse-triangle l)) (one-if-triangle a b c)))
+  (for/sum ([l lines]) (let-values ([(a b c) (parse-triangle l)]) (one-if-triangle a b c))))
 
 (define (part-2 lines)
   (for/fold ([sum 0] [t1 '()] [t2 '()] [t3 '()] #:result sum) ([l lines])
-    (define-values (a b c) (parse-triangle l))
-    (define t1´ (cons a t1))
-    (define t2´ (cons b t2))
-    (define t3´ (cons c t3))
-    (if (= 3 (length t1´))
-        (values
-         (+ sum (apply one-if-triangle t1´) (apply one-if-triangle t2´) (apply one-if-triangle t3´))
-         '()
-         '()
-         '())
-        (values sum t1´ t2´ t3´))))
+    (let*-values
+        ([(a b c) (parse-triangle l)] [(t1) (cons a t1)] [(t2) (cons b t2)] [(t3) (cons c t3)])
+      (if (= 3 (length t1))
+          (values
+           (+ sum (apply one-if-triangle t1) (apply one-if-triangle t2) (apply one-if-triangle t3))
+           '()
+           '()
+           '())
+          (values sum t1 t2 t3)))))
 
 (define (parse-triangle line)
   (apply values (map string->number (string-split line))))
