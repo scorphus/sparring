@@ -32,3 +32,17 @@
 
 (define (one-if-triangle a b c)
   (if (and (< a (+ b c)) (< b (+ a c)) (< c (+ a b))) 1 0))
+
+(module+ test
+  (require rackunit
+           rackunit/text-ui)
+
+  (define sample
+    (list "101 301 501" "102 302 502" "103 303 503" "201 401 601" "202 402 602" "203 403 603"))
+
+  (define suite
+    (test-suite "day 3 tests"
+                (test-equal? "part 1 with sample input" (part-1 sample) 3)
+                (test-equal? "part 1 with sample input" (part-2 sample) 6)))
+
+  (run-tests suite))
