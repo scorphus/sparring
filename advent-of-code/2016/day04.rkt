@@ -12,15 +12,16 @@
   (part-2 lines "northpoleobjects"))
 
 (define (part-1 lines)
-  (for/sum ([l lines])
-           (define room (reverse (string-split (string-replace l #rx"[][-]+" " "))))
+  (for/sum ([room (map parse-room lines)])
            (if (is-real-room room) (string->number (car (cdr room))) 0)))
 
 (define (part-2 lines lookup)
-  (for/first ([l lines]
-              #:do [(define room (reverse (string-split (string-replace l #rx"[][-]+" " "))))]
+  (for/first ([room (map parse-room lines)]
               #:when (and (is-real-room room) (room-contains room lookup)))
     (string->number (car (cdr room)))))
+
+(define (parse-room line)
+  (reverse (string-split (string-replace line #rx"[][-]+" " "))))
 
 (define (is-real-room room)
   (define checksum (car room))
