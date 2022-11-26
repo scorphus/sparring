@@ -1,13 +1,15 @@
 #lang racket/base
 
+(require racket/file)
 (require racket/list)
 (require racket/string)
 
 (module* main #f
+  (define lines (file->lines "day04.txt"))
   (printf "part 1: ")
-  (call-with-input-file "day04.txt" (λ (port) (part-1 (in-lines port))))
+  (part-1 lines)
   (printf "part 2: ")
-  (call-with-input-file "day04.txt" (λ (port) (part-2 (in-lines port) "northpoleobjects"))))
+  (part-2 lines "northpoleobjects"))
 
 (define (part-1 lines)
   (for/sum ([l lines])
