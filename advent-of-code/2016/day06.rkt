@@ -11,14 +11,17 @@
     (printf "part 2: ~a~n" (part-2 lines))))
 
 (define (part-1 lines)
-  (list->string (map (compose car (curry argmax cdr) hash->list)
+  (produce-error-corrected-message lines argmax))
+
+(define (part-2 lines)
+  (produce-error-corrected-message lines argmin))
+
+(define (produce-error-corrected-message lines predicate)
+  (list->string (map (compose car (curry predicate cdr) hash->list)
                      (for/fold ([count-maps (make-list (string-length (first lines)) #hash())]
                                 #:result count-maps)
                                ([line lines])
                        (map (curryr hash-update add1 0) count-maps (string->list line))))))
-
-(define (part-2 lines)
-  "part 2")
 
 (module+ test
   (require rackunit
@@ -45,6 +48,6 @@
   (define suite
     (test-suite "day 6 tests"
                 (test-equal? "part 1 with sample input" (part-1 sample) "easter")
-                (test-equal? "part 2 with sample input" (part-2 sample) "part 2")))
+                (test-equal? "part 2 with sample input" (part-2 sample) "advent")))
 
   (run-tests suite))
