@@ -1,8 +1,8 @@
 #lang racket/base
 
-(require racket/file)
-(require racket/list)
-(require racket/string)
+(require racket/file
+         racket/list
+         racket/string)
 
 (module* main #f
   (define lines (file->lines "day04.txt"))
