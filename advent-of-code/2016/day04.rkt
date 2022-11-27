@@ -19,7 +19,7 @@
     (string->number (car (cdr room)))))
 
 (define (parse-room line)
-  (reverse (string-split (string-replace line #rx"[][-]+" " "))))
+  (reverse (string-split line #rx"[][-]+")))
 
 (define (is-real-room room)
   (let* ([checksum (car room)]
