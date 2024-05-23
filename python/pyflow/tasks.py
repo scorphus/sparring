@@ -14,8 +14,18 @@ class Task:
     """Base class for tasks"""
 
     def __init__(self):
-        self.input_keys = []
-        self.output_keys = []
+        input_keys = getattr(self, "input_keys", None)
+        output_keys = getattr(self, "output_keys", None)
+        if input_keys is None or output_keys is None:
+            raise ValueError("Task must define input_keys and output_keys")
+        if not isinstance(input_keys, tuple) or not isinstance(output_keys, tuple):
+            raise ValueError("Task must define input_keys and output_keys as tuples")
+        if not input_keys and not output_keys:
+            raise ValueError("Task must have at least one input or output key")
+        if len(set(output_keys)) > 1:
+            raise ValueError("Task must have only one output key")
+        if len(set(input_keys) & set(output_keys)) > 0:
+            raise ValueError("Task input and output keys must be disjoint")
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Execute the task and return the updated pipeline"""
@@ -25,8 +35,8 @@ class Task:
 class RetrieveOEISRandomSequence(Task):
     """Task to retrieve a random sequence from OEIS"""
 
-    input_keys = []
-    output_keys = [pipeline_module.KEY_OEIS_RANDOM_SEQUENCE]
+    input_keys = ()
+    output_keys = (pipeline_module.KEY_OEIS_RANDOM_SEQUENCE,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Retrieve a random sequence from OEIS and store it in the pipeline"""
@@ -57,8 +67,8 @@ class RetrieveOEISRandomSequence(Task):
 class ComputeListOfNumbers(Task):
     """Task to compute a list of numbers from the OEIS random sequence"""
 
-    input_keys = [pipeline_module.KEY_OEIS_RANDOM_SEQUENCE]
-    output_keys = [pipeline_module.KEY_LIST_OF_NUMBERS]
+    input_keys = (pipeline_module.KEY_OEIS_RANDOM_SEQUENCE,)
+    output_keys = (pipeline_module.KEY_LIST_OF_NUMBERS,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Compute a list of numbers from the OEIS random sequence"""
@@ -71,8 +81,8 @@ class ComputeListOfNumbers(Task):
 class CalculateSumOfNumbers(Task):
     """Task to calculate the sum of a list of numbers"""
 
-    input_keys = [pipeline_module.KEY_LIST_OF_NUMBERS]
-    output_keys = [pipeline_module.KEY_SUM_OF_NUMBERS]
+    input_keys = (pipeline_module.KEY_LIST_OF_NUMBERS,)
+    output_keys = (pipeline_module.KEY_SUM_OF_NUMBERS,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Sum a list of numbers and store the result in the pipeline"""
@@ -84,11 +94,11 @@ class CalculateSumOfNumbers(Task):
 class CalculateMeanOfNumbers(Task):
     """Task to calculate the mean of a list of numbers"""
 
-    input_keys = [
+    input_keys = (
         pipeline_module.KEY_SUM_OF_NUMBERS,
         pipeline_module.KEY_LIST_OF_NUMBERS,
-    ]
-    output_keys = [pipeline_module.KEY_MEAN_OF_NUMBERS]
+    )
+    output_keys = (pipeline_module.KEY_MEAN_OF_NUMBERS,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Calculate the mean of a list of numbers and store the result in the pipeline"""
@@ -100,8 +110,8 @@ class CalculateMeanOfNumbers(Task):
 class CalculateMedianOfNumbers(Task):
     """Task to calculate the median of a list of numbers"""
 
-    input_keys = [pipeline_module.KEY_LIST_OF_NUMBERS]
-    output_keys = [pipeline_module.KEY_MEDIAN_OF_NUMBERS]
+    input_keys = (pipeline_module.KEY_LIST_OF_NUMBERS,)
+    output_keys = (pipeline_module.KEY_MEDIAN_OF_NUMBERS,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Calculate the median of a list of numbers and store the result in the pipeline"""
@@ -117,12 +127,12 @@ class CalculateMedianOfNumbers(Task):
 class ComputeFinalResult(Task):
     """Task to compute the final result"""
 
-    input_keys = [
+    input_keys = (
         pipeline_module.KEY_SUM_OF_NUMBERS,
         pipeline_module.KEY_MEAN_OF_NUMBERS,
         pipeline_module.KEY_MEDIAN_OF_NUMBERS,
-    ]
-    output_keys = [pipeline_module.KEY_FINAL_RESULT]
+    )
+    output_keys = (pipeline_module.KEY_FINAL_RESULT,)
 
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Compute the final result and store it in the pipeline"""
