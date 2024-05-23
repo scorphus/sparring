@@ -1,6 +1,5 @@
 import statistics
 
-import requests_mock
 import pytest
 import pipeline as pipeline_module
 import tasks
