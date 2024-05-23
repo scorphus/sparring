@@ -1,7 +1,11 @@
+import abc
+import graphlib
 import logging
+import inspect
 import random
 import re
 import time
+from typing import List
 
 import pipeline as pipeline_module
 import requests
@@ -10,12 +14,23 @@ OEIS_WEBCAM_URL = "https://oeis.org/webcam?fromjavascript=true&q=keyword:nice"
 MAX_RETRIES = 3
 
 
-class Task:
-    """Base class for tasks"""
+class TaskMeta(abc.ABCMeta):
+    """Metaclass for tasks"""
 
-    def __init__(self):
-        input_keys = getattr(self, "input_keys", None)
-        output_keys = getattr(self, "output_keys", None)
+    registry: List["Task"] = []
+
+    def __new__(mcs, name, bases, namespace) -> "Task":
+        new_cls = super().__new__(mcs, name, bases, namespace)
+        if not inspect.isabstract(new_cls) and len(new_cls.__mro__) > 2:
+            mcs.check_attributes(new_cls)
+            mcs.registry.append(new_cls)
+        return new_cls
+
+    @staticmethod
+    def check_attributes(new_cls) -> None:
+        """Check that the task has the required attributes"""
+        input_keys = getattr(new_cls, "input_keys", None)
+        output_keys = getattr(new_cls, "output_keys", None)
         if input_keys is None or output_keys is None:
             raise ValueError("Task must define input_keys and output_keys")
         if not isinstance(input_keys, tuple) or not isinstance(output_keys, tuple):
@@ -27,9 +42,28 @@ class Task:
         if len(set(input_keys) & set(output_keys)) > 0:
             raise ValueError("Task input and output keys must be disjoint")
 
+
+class Task(metaclass=TaskMeta):
+    """Base class for tasks"""
+
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Execute the task and return the updated pipeline"""
         raise NotImplementedError
+
+    @classmethod
+    def get_sorted_tasks(cls) -> List["Task"]:
+        """Return all Tasks from the registry, sorted in topological order"""
+        graph, input_keys_map, output_keys_map = {}, {}, {}
+        for task_cls in cls.registry:
+            graph.setdefault(task_cls, set())
+            for key in task_cls.input_keys:
+                input_keys_map.setdefault(key, set()).add(task_cls)
+            for key in task_cls.output_keys:
+                output_keys_map.setdefault(key, set()).add(task_cls)
+        for key, classes in input_keys_map.items():
+            for task_cls in classes:
+                graph[task_cls].update(output_keys_map.get(key, []))
+        return list(graphlib.TopologicalSorter(graph).static_order())
 
 
 class RetrieveOEISRandomSequence(Task):

@@ -91,3 +91,16 @@ def test_compute_final_result(pipeline_complete):
         "mean": sum(LIST_OF_NUMBERS) / len(LIST_OF_NUMBERS),
         "median": statistics.median(LIST_OF_NUMBERS),
     }
+
+
+def test_task_get_sorted_tasks():
+    expected = [
+        tasks.RetrieveOEISRandomSequence,
+        tasks.ComputeListOfNumbers,
+        tasks.CalculateSumOfNumbers,
+        tasks.CalculateMedianOfNumbers,
+        tasks.CalculateMeanOfNumbers,
+        tasks.ComputeFinalResult,
+    ]
+    actual = tasks.Task.get_sorted_tasks()
+    assert actual == expected
