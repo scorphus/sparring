@@ -104,3 +104,18 @@ def test_task_get_tasks_in_static_order():
     ]
     actual = list(tasks.Task.get_tasks_in_static_order())
     assert actual == expected
+
+
+def test_task_get_tasks_in_parallelizable_order():
+    expected = [
+        (tasks.RetrieveOEISRandomSequence,),
+        (tasks.ComputeListOfNumbers,),
+        (
+            tasks.CalculateSumOfNumbers,
+            tasks.CalculateMedianOfNumbers,
+        ),
+        (tasks.CalculateMeanOfNumbers,),
+        (tasks.ComputeFinalResult,),
+    ]
+    actual = list(tasks.Task.get_tasks_in_parallelizable_order())
+    assert actual == expected

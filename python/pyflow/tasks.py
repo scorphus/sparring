@@ -47,6 +47,11 @@ class TaskMeta(abc.ABCMeta):
     @classmethod
     def get_tasks_in_static_order(mcs) -> Iterable:
         """Return all Tasks from the registry, sorted in topological order"""
+        graph = mcs._build_graph()
+        return graphlib.TopologicalSorter(graph).static_order()
+
+    @classmethod
+    def _build_graph(mcs) -> Dict["TaskMeta", Set["TaskMeta"]]:
         graph: Dict["TaskMeta", Set["TaskMeta"]] = {}
         input_keys_map: Dict[str, Set["TaskMeta"]] = {}
         output_keys_map: Dict[str, Set["TaskMeta"]] = {}
@@ -59,7 +64,17 @@ class TaskMeta(abc.ABCMeta):
         for key, classes in input_keys_map.items():
             for cls in classes:
                 graph[cls].update(output_keys_map.get(key, []))
-        return graphlib.TopologicalSorter(graph).static_order()
+        return graph
+
+    @classmethod
+    def get_tasks_in_parallelizable_order(mcs) -> Iterable:
+        """Return all Tasks from the registry, sorted in parallelizable order"""
+        sorter = graphlib.TopologicalSorter(mcs._build_graph())
+        sorter.prepare()
+        while sorter.is_active():
+            node_group = sorter.get_ready()
+            yield node_group
+            sorter.done(*node_group)
 
 
 class Task(metaclass=TaskMeta):
