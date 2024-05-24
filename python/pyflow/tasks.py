@@ -42,6 +42,21 @@ class TaskMeta(abc.ABCMeta):
         if len(set(input_keys) & set(output_keys)) > 0:
             raise ValueError("Task input and output keys must be disjoint")
 
+    @classmethod
+    def get_tasks_in_static_order(mcs) -> List["Task"]:
+        """Return all Tasks from the registry, sorted in topological order"""
+        graph, input_keys_map, output_keys_map = {}, {}, {}
+        for cls in mcs.registry:
+            graph.setdefault(cls, set())
+            for key in cls.input_keys:
+                input_keys_map.setdefault(key, set()).add(cls)
+            for key in cls.output_keys:
+                output_keys_map.setdefault(key, set()).add(cls)
+        for key, classes in input_keys_map.items():
+            for cls in classes:
+                graph[cls].update(output_keys_map.get(key, []))
+        return list(graphlib.TopologicalSorter(graph).static_order())
+
 
 class Task(metaclass=TaskMeta):
     """Base class for tasks"""
@@ -49,21 +64,6 @@ class Task(metaclass=TaskMeta):
     def execute(self, pipeline: pipeline_module.Pipeline) -> pipeline_module.Pipeline:
         """Execute the task and return the updated pipeline"""
         raise NotImplementedError
-
-    @classmethod
-    def get_sorted_tasks(cls) -> List["Task"]:
-        """Return all Tasks from the registry, sorted in topological order"""
-        graph, input_keys_map, output_keys_map = {}, {}, {}
-        for task_cls in cls.registry:
-            graph.setdefault(task_cls, set())
-            for key in task_cls.input_keys:
-                input_keys_map.setdefault(key, set()).add(task_cls)
-            for key in task_cls.output_keys:
-                output_keys_map.setdefault(key, set()).add(task_cls)
-        for key, classes in input_keys_map.items():
-            for task_cls in classes:
-                graph[task_cls].update(output_keys_map.get(key, []))
-        return list(graphlib.TopologicalSorter(graph).static_order())
 
 
 class RetrieveOEISRandomSequence(Task):
