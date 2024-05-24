@@ -5,7 +5,7 @@ import inspect
 import random
 import re
 import time
-from typing import Dict, List, Set, Tuple
+from typing import Dict, Iterable, List, Set, Tuple
 
 import pipeline as pipeline_module
 import requests
@@ -45,7 +45,7 @@ class TaskMeta(abc.ABCMeta):
             raise ValueError("Task input and output keys must be disjoint")
 
     @classmethod
-    def get_tasks_in_static_order(mcs) -> List["Task"]:
+    def get_tasks_in_static_order(mcs) -> Iterable:
         """Return all Tasks from the registry, sorted in topological order"""
         graph: Dict["TaskMeta", Set["TaskMeta"]] = {}
         input_keys_map: Dict[str, Set["TaskMeta"]] = {}
@@ -59,7 +59,7 @@ class TaskMeta(abc.ABCMeta):
         for key, classes in input_keys_map.items():
             for cls in classes:
                 graph[cls].update(output_keys_map.get(key, []))
-        return list(graphlib.TopologicalSorter(graph).static_order())
+        return graphlib.TopologicalSorter(graph).static_order()
 
 
 class Task(metaclass=TaskMeta):

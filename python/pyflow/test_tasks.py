@@ -102,5 +102,5 @@ def test_task_get_sorted_tasks():
         tasks.CalculateMeanOfNumbers,
         tasks.ComputeFinalResult,
     ]
-    actual = tasks.Task.get_tasks_in_static_order()
+    actual = list(tasks.Task.get_tasks_in_static_order())
     assert actual == expected
