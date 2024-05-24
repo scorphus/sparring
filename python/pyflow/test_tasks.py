@@ -93,7 +93,7 @@ def test_compute_final_result(pipeline_complete):
     }
 
 
-def test_task_get_sorted_tasks():
+def test_task_get_tasks_in_static_order():
     expected = [
         tasks.RetrieveOEISRandomSequence,
         tasks.ComputeListOfNumbers,
