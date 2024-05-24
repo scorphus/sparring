@@ -5,7 +5,7 @@ import inspect
 import random
 import re
 import time
-from typing import List
+from typing import Dict, List, Set, Tuple
 
 import pipeline as pipeline_module
 import requests
@@ -17,9 +17,11 @@ MAX_RETRIES = 3
 class TaskMeta(abc.ABCMeta):
     """Metaclass for tasks"""
 
-    registry: List["Task"] = []
+    registry: List["TaskMeta"] = []
+    input_keys: Tuple[str, ...]
+    output_keys: Tuple[str, ...]
 
-    def __new__(mcs, name, bases, namespace) -> "Task":
+    def __new__(mcs, name, bases, namespace) -> "TaskMeta":
         new_cls = super().__new__(mcs, name, bases, namespace)
         if not inspect.isabstract(new_cls) and len(new_cls.__mro__) > 2:
             mcs.check_attributes(new_cls)
@@ -45,7 +47,9 @@ class TaskMeta(abc.ABCMeta):
     @classmethod
     def get_tasks_in_static_order(mcs) -> List["Task"]:
         """Return all Tasks from the registry, sorted in topological order"""
-        graph, input_keys_map, output_keys_map = {}, {}, {}
+        graph: Dict["TaskMeta", Set["TaskMeta"]] = {}
+        input_keys_map: Dict[str, Set["TaskMeta"]] = {}
+        output_keys_map: Dict[str, Set["TaskMeta"]] = {}
         for cls in mcs.registry:
             graph.setdefault(cls, set())
             for key in cls.input_keys:
