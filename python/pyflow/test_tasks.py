@@ -5,14 +5,14 @@ import pipeline as pipeline_module
 import tasks
 
 
-OEM_RANDOM_SEQUENCE = "1, 2, 3, 4, 5"
+OEIS_RANDOM_SEQUENCE = "1, 2, 3, 4, 5"
 LIST_OF_NUMBERS = [1, 2, 3, 4, 5]
 
 
 @pytest.fixture(autouse=True)
 def fixture_requests_get_mock(requests_mock):
     return requests_mock.get(
-        tasks.OEIS_WEBCAM_URL, text=f"<tt>{OEM_RANDOM_SEQUENCE}</tt>"
+        tasks.OEIS_WEBCAM_URL, text=f"<tt>{OEIS_RANDOM_SEQUENCE}</tt>"
     )
 
 
@@ -48,7 +48,7 @@ def test_retrieve_oeis_random_sequence(pipeline):
     assert pipeline.oeis_random_sequence is not None
     assert isinstance(pipeline.oeis_random_sequence, str)
     assert len(pipeline.oeis_random_sequence) > 0
-    assert pipeline.oeis_random_sequence == OEM_RANDOM_SEQUENCE
+    assert pipeline.oeis_random_sequence == OEIS_RANDOM_SEQUENCE
 
 
 def test_compute_list_of_numbers(pipeline_with_sequence):
