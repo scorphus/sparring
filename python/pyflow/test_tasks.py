@@ -9,9 +9,15 @@ OEM_RANDOM_SEQUENCE = "1, 2, 3, 4, 5"
 LIST_OF_NUMBERS = [1, 2, 3, 4, 5]
 
 
+@pytest.fixture(autouse=True)
+def fixture_requests_get_mock(requests_mock):
+    return requests_mock.get(
+        tasks.OEIS_WEBCAM_URL, text=f"<tt>{OEM_RANDOM_SEQUENCE}</tt>"
+    )
+
+
 @pytest.fixture(name="pipeline")
-def fixture_pipeline(requests_mock):
-    requests_mock.get(tasks.OEIS_WEBCAM_URL, text=f"<tt>{OEM_RANDOM_SEQUENCE}</tt>")
+def fixture_pipeline():
     return pipeline_module.Pipeline()
 
 
@@ -119,3 +125,14 @@ def test_task_get_tasks_in_parallelizable_order():
     ]
     actual = list(tasks.Task.get_tasks_in_parallelizable_order())
     assert actual == expected
+
+
+def test_task_execution_in_static_order():
+    pipeline = pipeline_module.Pipeline()
+    for task in tasks.Task.get_tasks_in_static_order():
+        pipeline = task().execute(pipeline)
+    assert pipeline.final_result == {
+        "sum": sum(LIST_OF_NUMBERS),
+        "mean": sum(LIST_OF_NUMBERS) / len(LIST_OF_NUMBERS),
+        "median": statistics.median(LIST_OF_NUMBERS),
+    }
