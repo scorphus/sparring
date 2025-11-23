@@ -27,7 +27,7 @@ let read_instructions () =
   in
   aux IntMap.empty IntMap.empty
 
-let rec process bots givings the_bot bins =
+let rec process bots givings hi lo the_bot bins =
   let bot, val_lo, val_hi =
     IntMap.fold
       (fun bot values acc ->
@@ -38,7 +38,7 @@ let rec process bots givings the_bot bins =
   in
   if bot = -1 then (the_bot, bins)
   else
-    let the_bot = if (val_lo, val_hi) = (17, 61) then bot else the_bot in
+    let the_bot = if (val_lo, val_hi) = (lo, hi) then bot else the_bot in
     let bots = IntMap.add bot [] bots in
     let kind_lo, rec_lo, kind_hi, rec_hi = IntMap.find bot givings in
     let bots, bins =
@@ -47,11 +47,19 @@ let rec process bots givings the_bot bins =
     let bots, bins =
       if kind_hi = "bot" then (append_to_key bots rec_hi val_hi, bins) else (bots, IntMap.add rec_hi val_hi bins)
     in
-    process bots givings the_bot bins
+    process bots givings hi lo the_bot bins
 
 let () =
+  let hi, lo =
+    match Sys.argv with
+    | [| _; hi; lo |] ->
+        let hi = int_of_string hi in
+        let lo = int_of_string lo in
+        (hi, lo)
+    | _ -> failwith "Usage: day10 <hi> <lo>"
+  in
   let bots, givings = read_instructions () in
-  let the_bot, bins = process bots givings (-1) IntMap.empty in
+  let the_bot, bins = process bots givings hi lo (-1) IntMap.empty in
   Printf.printf "Part 1: %d\n" the_bot;
   let part2 = List.fold_left (fun acc output -> IntMap.find output bins * acc) 1 [ 0; 1; 2 ] in
   Printf.printf "Part 2: %d\n" part2
