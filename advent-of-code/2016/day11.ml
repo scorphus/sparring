@@ -20,9 +20,22 @@ let read_arrangement () =
   in
   aux []
 
-let () =
-  let arrangement = read_arrangement () in
+let count_stems arrangement =
   let steps, _ =
     List.fold_left (fun (steps, acc) items -> (steps + (2 * (acc + items - 1)) - 1, acc + items)) (0, 0) arrangement
   in
-  Printf.printf "Part 1: %d\n" steps
+  steps
+
+let () =
+  let arrangement = read_arrangement () in
+  let steps = count_stems arrangement in
+  Printf.printf "Part 1: %d\n" steps;
+  let arrangement =
+    match arrangement with
+    | first :: tail ->
+        let new_first = 4 + first in
+        new_first :: tail
+    | [] -> failwith "invalid arrangement"
+  in
+  let steps = count_stems arrangement in
+  Printf.printf "Part 2: %d\n" steps
