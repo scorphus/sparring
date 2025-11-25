@@ -22,7 +22,7 @@ let read_code () =
   in
   aux InstrMap.empty 0
 
-let exec code =
+let exec code regs =
   let rec aux regs i =
     let instr = InstrMap.find_opt i code in
     match instr with
@@ -44,11 +44,15 @@ let exec code =
             let x_value = match RegMap.find_opt x regs with Some v -> v | None -> 0 in
             if x_value <> 0 then aux regs (i + y) else aux regs (i + 1))
   in
-  aux RegMap.empty 0
+  aux regs 0
 
 let () =
   let code = read_code () in
-  let regs = exec code in
-  match RegMap.find_opt "a" regs with
+  let regs = exec code RegMap.empty in
+  (match RegMap.find_opt "a" regs with
   | Some a -> Printf.printf "Part 1: %d\n" a
+  | None -> failwith "Register a not found");
+  let regs = exec code (RegMap.add "c" 1 RegMap.empty) in
+  match RegMap.find_opt "a" regs with
+  | Some a -> Printf.printf "Part 2: %d\n" a
   | None -> failwith "Register a not found"
