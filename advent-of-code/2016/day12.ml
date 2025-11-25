@@ -23,6 +23,7 @@ let read_code () =
   aux InstrMap.empty 0
 
 let exec code regs =
+  let get_reg regs x = match RegMap.find_opt x regs with Some v -> v | None -> 0 in
   let rec aux regs i =
     let instr = InstrMap.find_opt i code in
     match instr with
@@ -30,19 +31,11 @@ let exec code regs =
     | Some instr -> (
         match instr with
         | `CpyN (n, y) -> aux (RegMap.add y n regs) (i + 1)
-        | `CpyR (x, y) ->
-            let value = match RegMap.find_opt x regs with Some v -> v | None -> 0 in
-            aux (RegMap.add y value regs) (i + 1)
-        | `Inc x ->
-            let value = match RegMap.find_opt x regs with Some v -> v + 1 | None -> 1 in
-            aux (RegMap.add x value regs) (i + 1)
-        | `Dec x ->
-            let value = match RegMap.find_opt x regs with Some v -> v - 1 | None -> -1 in
-            aux (RegMap.add x value regs) (i + 1)
+        | `CpyR (x, y) -> aux (RegMap.add y (get_reg regs x) regs) (i + 1)
+        | `Inc x -> aux (RegMap.add x (get_reg regs x + 1) regs) (i + 1)
+        | `Dec x -> aux (RegMap.add x (get_reg regs x - 1) regs) (i + 1)
         | `JnzN (n, y) -> if n <> 0 then aux regs (i + y) else aux regs (i + 1)
-        | `JnzR (x, y) ->
-            let x_value = match RegMap.find_opt x regs with Some v -> v | None -> 0 in
-            if x_value <> 0 then aux regs (i + y) else aux regs (i + 1))
+        | `JnzR (x, y) -> if get_reg regs x <> 0 then aux regs (i + y) else aux regs (i + 1))
   in
   aux regs 0
 
