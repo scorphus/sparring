@@ -1,9 +1,12 @@
 let window = 1000
-let md5_hash str = Digest.string str |> Digest.to_hex
 
-let gen_hashes salt id =
+let rec md5_hash ?(stretch = 0) str =
+  let hash = Digest.string str |> Digest.to_hex in
+  if stretch = 0 then hash else md5_hash ~stretch:(stretch - 1) hash
+
+let gen_hashes ?(stretch = 0) salt id =
   let key = salt ^ string_of_int id in
-  md5_hash key
+  md5_hash ~stretch key
 
 let find_nlet hash n =
   let rec aux i =
@@ -34,7 +37,7 @@ let decide id tri_id qui_id =
 
 let extract_head = function [] -> ((0, ""), []) | h :: t -> (h, t)
 
-let gen_keys salt =
+let gen_keys ?(stretch = 0) salt =
   let rec aux id tris quis () =
     let (tri_id, tri_str), tri_t = extract_head tris in
     let (qui_id, qui_str), qui_t = extract_head quis in
@@ -43,7 +46,7 @@ let gen_keys salt =
     | None -> (
         match decide id tri_id qui_id with
         | `DropNone ->
-            let hash = gen_hashes salt id in
+            let hash = gen_hashes ~stretch salt id in
             let tris = match find_nlet hash 3 with Some t -> tris @ [ (id, t) ] | None -> tris in
             let quis = match find_nlet hash 5 with Some q -> quis @ [ (id, String.sub q 0 3) ] | None -> quis in
             aux (id + 1) tris quis ()
@@ -58,4 +61,6 @@ let () =
     match Sys.argv with [| _; salt; n |] -> (salt, int_of_string n) | _ -> failwith "Usage: day14 <salt> <n>"
   in
   let nth_key = gen_keys salt |> Seq.drop (n - 1) |> Seq.take 1 |> List.of_seq |> List.hd in
-  Printf.printf "Part 1: %d\n" nth_key
+  Printf.printf "Part 1: %d\n" nth_key;
+  let nth_key_stretched = gen_keys ~stretch:2016 salt |> Seq.drop (n - 1) |> Seq.take 1 |> List.of_seq |> List.hd in
+  Printf.printf "Part 2: %d\n" nth_key_stretched
