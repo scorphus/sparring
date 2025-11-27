@@ -17,5 +17,9 @@ let find_time_for_another_capsule discs =
   aux 0
 
 let () =
-  let time = read_discs [] |> find_time_for_another_capsule in
-  Printf.printf "Part 1: %d\n" time
+  let discs = read_discs [] in
+  let time = find_time_for_another_capsule discs in
+  Printf.printf "Part 1: %d\n" time;
+  let discs = (List.length discs + 1, 11, 0) :: discs in
+  let time = find_time_for_another_capsule discs in
+  Printf.printf "Part 2: %d\n" time
