@@ -25,4 +25,5 @@ let () =
   let initial_state =
     match Sys.argv with [| _; initial_state |] -> initial_state | _ -> failwith "Usage: day16 <initial_state>"
   in
-  Printf.printf "Part 1: %s\n" (fill_data initial_state 272 |> checksum)
+  Printf.printf "Part 1: %s\n" (fill_data initial_state 272 |> checksum);
+  Printf.printf "Part 2: %s\n" (fill_data initial_state 35651584 |> checksum)
