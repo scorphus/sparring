@@ -22,4 +22,5 @@ let generate_rows initial_state total_rows =
 
 let () =
   let initial_state = read_line () in
-  Printf.printf "Part 1: %d\n" (generate_rows initial_state 40)
+  Printf.printf "Part 1: %d\n" (generate_rows initial_state 40);
+  Printf.printf "Part 2: %d\n" (generate_rows initial_state 400000)
