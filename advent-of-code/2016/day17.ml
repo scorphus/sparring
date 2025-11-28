@@ -26,14 +26,17 @@ let neighbors (x, y) passcode path =
 let bfs passcode =
   let start = (0, 0) in
   let goal = (3, 3) in
-  let rec aux queue =
+  let rec aux queue shortest longest =
     match queue with
-    | [] -> ""
-    | (pos, path) :: rest -> if pos = goal then path else aux (rest @ neighbors pos passcode path)
+    | [] -> (shortest, longest)
+    | (pos, path) :: rest ->
+        if pos = goal then aux rest (match shortest with "" -> path | s -> s) (max longest (String.length path))
+        else aux (rest @ neighbors pos passcode path) shortest longest
   in
-  aux [ (start, "") ]
+  aux [ (start, "") ] "" 0
 
 let () =
-  let passcode = match Sys.argv with [| _; s |] -> s | _ -> failwith "Usage: day17 <passcode>" in
-  let shortest = bfs passcode in
-  Printf.printf "Part 1: %s\n" shortest
+  let passcode = match Sys.argv with [| _; passcode |] -> passcode | _ -> failwith "Usage: day17 <passcode>" in
+  let shortest, longest = bfs passcode in
+  Printf.printf "Part 1: %s\n" shortest;
+  Printf.printf "Part 2: %d\n" longest
