@@ -31,4 +31,6 @@ let () =
   let ranges = read_ranges () in
   let merged = merge_ranges ranges in
   let lowest_allowed = match merged with [] -> 0 | (_, b) :: _ -> b + 1 in
-  Printf.printf "Part 1: %d\n" lowest_allowed
+  Printf.printf "Part 1: %d\n" lowest_allowed;
+  let allowed_ips = 4294967296 - List.fold_left (fun acc (a, b) -> acc + (b - a + 1)) 0 merged in
+  Printf.printf "Part 2: %d\n" allowed_ips
