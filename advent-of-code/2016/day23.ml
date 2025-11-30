@@ -65,7 +65,26 @@ let exec code regs =
   in
   aux code regs 0
 
+let find_c_and_d code =
+  let rec aux i c d =
+    match InstrMap.find_opt i code with
+    | None -> (c, d)
+    | Some instr -> (
+        match instr with
+        | `JnzNR (d, "d") -> (
+            match InstrMap.find_opt (i - 1) code with Some (`CpyNR (c, "c")) -> (c, d) | _ -> aux (i + 1) c d)
+        | _ -> aux (i + 1) c d)
+  in
+  aux 0 0 0
+
+let rec factorial n = if n <= 1 then 1 else n * factorial (n - 1)
+
+let part_2 code a =
+  let c, d = find_c_and_d code in
+  factorial a + (c * d)
+
 let () =
   let code = read_code () in
   let regs = exec code (RegMap.add "a" 7 RegMap.empty) in
-  Printf.printf "Part 1: %d\n" (RegMap.find "a" regs)
+  Printf.printf "Part 1: %d\n" (RegMap.find "a" regs);
+  Printf.printf "Part 2: %d\n" (part_2 code 12)
