@@ -39,7 +39,21 @@ let count_viable_pairs cluster =
     (List.sort (fun (_, _, _, _, avail1) (_, _, _, _, avail2) -> compare avail1 avail2) cluster)
     0
 
+let count_viable_pairs_naive cluster =
+  List.fold_left
+    (fun count a ->
+      List.fold_left
+        (fun count b ->
+          let ax, ay, _, aused, _ = a in
+          let bx, by, _, _, bavail = b in
+          if aused > 0 && (ax <> bx || ay <> by) && aused <= bavail then count + 1 else count)
+        count cluster)
+    0 cluster
+
 let () =
   let cluster = read_cluster () in
+  let start = Sys.time () in
   let part1 = count_viable_pairs cluster in
-  Printf.printf "Part 1: %d\n" part1
+  Printf.printf "Part 1: %d (computed in %.6f seconds)\n" part1 (Sys.time () -. start);
+  let part1_naive = count_viable_pairs_naive cluster in
+  Printf.printf "Part 1 (naive): %d (computed in %.6f seconds)\n" part1_naive (Sys.time () -. start)
