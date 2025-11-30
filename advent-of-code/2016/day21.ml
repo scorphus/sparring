@@ -55,6 +55,13 @@ let move_position string x y =
   String.init (String.length string) (fun i ->
       if i < y then without_x.[i] else if i = y then char_at_x else without_x.[i - 1])
 
+let undo_rotate_based string x =
+  let n = String.length string in
+  let current_idx = String.index string x in
+  let original_idx = if current_idx mod 2 = 1 then (current_idx - 1) / 2 else (((current_idx - 2 + n) mod n) + n) / 2 in
+  let steps_to_undo = 1 + original_idx + if original_idx >= 4 then 1 else 0 in
+  rotate_left string steps_to_undo
+
 let run_ops operations string =
   List.fold_left
     (fun s op ->
@@ -68,8 +75,25 @@ let run_ops operations string =
       | `Move (x, y) -> move_position s x y)
     string operations
 
+let undo_ops operations string =
+  List.fold_left
+    (fun s op ->
+      match op with
+      | `SwapPosition (x, y) -> swap_position s x y
+      | `SwapLetter (x, y) -> swap_letter s x y
+      | `RotateLeft x -> rotate_right s x
+      | `RotateRight x -> rotate_left s x
+      | `RotateBased x -> undo_rotate_based s x
+      | `Reverse (x, y) -> reverse_positions s x y
+      | `Move (x, y) -> move_position s y x)
+    string (List.rev operations)
+
 let () =
-  let start = match Sys.argv with [| _; start |] -> start | _ -> failwith "Usage: day21 <start>" in
+  let s1, s2 =
+    match Sys.argv with [| _; s1; s2 |] -> (s1, s2) | _ -> failwith "Usage: day21 <start_part_1> <start_part_2>"
+  in
   let operations = read_ops () in
-  let result = run_ops operations start in
-  Printf.printf "Part 1: %s\n" result
+  let result = run_ops operations s1 in
+  Printf.printf "Part 1: %s\n" result;
+  let unscrambled = undo_ops operations s2 in
+  Printf.printf "Part 2: %s\n" unscrambled
