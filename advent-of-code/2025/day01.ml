@@ -26,6 +26,19 @@ let part_1 rotations =
   in
   zeros
 
+let rec apply_clicks state dir clicks zeros =
+  if clicks = 0 then (state, zeros)
+  else
+    let state = (state + dir + dial_len) mod dial_len in
+    apply_clicks state dir (clicks - 1) (if state = 0 then zeros + 1 else zeros)
+
+let part_2 rotations =
+  let _, zeros =
+    List.fold_left (fun (state, zeros) (dir, clicks) -> apply_clicks state dir clicks zeros) (dial_start, 0) rotations
+  in
+  zeros
+
 let () =
   let rotations = read_rotations [] in
-  Printf.printf "Part 1: %d\n" (part_1 rotations)
+  Printf.printf "Part 1: %d\n" (part_1 rotations);
+  Printf.printf "Part 2: %d\n" (part_2 rotations)
