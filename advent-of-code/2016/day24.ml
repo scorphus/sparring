@@ -54,33 +54,56 @@ let bfs map start distances =
   in
   aux [ (start, 0) ] (PosMap.add start () PosMap.empty) distances
 
+module DPMap = Map.Make (struct
+  type t = int * int
+
+  let compare = compare
+end)
+
+let try_from_node distances mask u dp v =
+  if mask land (1 lsl v) = 0 || u = v then dp
+  else
+    let prev_mask = mask land lnot (1 lsl u) in
+    match (PosMap.find_opt (v, u) distances, DPMap.find_opt (prev_mask, v) dp) with
+    | Some dist, Some prev_dist ->
+        let new_dist = prev_dist + dist in
+        let current = DPMap.find_opt (mask, u) dp |> Option.value ~default:max_int in
+        DPMap.add (mask, u) (min current new_dist) dp
+    | _ -> dp
+
+let best_path_to_node distances poi_count mask dp u =
+  if mask land (1 lsl u) = 0 then dp
+  else List.init poi_count Fun.id |> List.fold_left (try_from_node distances mask u) dp
+
 let tsp_held_karp distances poi_count =
   let full_mask = (1 lsl poi_count) - 1 in
-  let dp = Array.make_matrix (1 lsl poi_count) poi_count max_int in
-  dp.(1).(0) <- 0;
-  for mask = 1 to full_mask do
-    for u = 0 to poi_count - 1 do
-      if mask land (1 lsl u) <> 0 then
-        for v = 0 to poi_count - 1 do
-          if mask land (1 lsl v) <> 0 && u <> v then
-            let prev_mask = mask land lnot (1 lsl u) in
-            match PosMap.find_opt (v, u) distances with
-            | Some dist when dp.(prev_mask).(v) < max_int ->
-                dp.(mask).(u) <- min dp.(mask).(u) (dp.(prev_mask).(v) + dist)
-            | _ -> ()
-        done
-    done
-  done;
-  let res = ref max_int in
-  for u = 0 to poi_count - 1 do
-    res := min !res dp.(full_mask).(u)
-  done;
-  !res
+  List.init full_mask succ
+  |> List.fold_left
+       (fun dp mask -> List.init poi_count Fun.id |> List.fold_left (best_path_to_node distances poi_count mask) dp)
+       (DPMap.add (1, 0) 0 DPMap.empty)
+
+let part1 dp poi_count =
+  let full_mask = (1 lsl poi_count) - 1 in
+  List.init poi_count Fun.id
+  |> List.filter_map (fun u -> DPMap.find_opt (full_mask, u) dp)
+  |> List.fold_left min max_int
+
+let part2 dp poi_count distances =
+  let full_mask = (1 lsl poi_count) - 1 in
+  List.init (poi_count - 1) succ
+  |> List.filter_map (fun u ->
+      match (DPMap.find_opt (full_mask, u) dp, PosMap.find_opt (u, 0) distances) with
+      | Some dp_val, Some dist -> Some (dp_val + dist)
+      | _ -> None)
+  |> List.fold_left min max_int
 
 let () =
   let map = read_map () in
   let poi = get_points_of_interest map in
   let distances = List.fold_left (fun acc (pos, _) -> bfs map pos acc) PosMap.empty poi in
   let poi_count = List.length poi in
-  let part1 = tsp_held_karp distances poi_count in
-  Printf.printf "Part 1: %d\n" part1
+  let dp = tsp_held_karp distances poi_count in
+  let part1 = part1 dp poi_count in
+  Printf.printf "Part 1: %d\n" part1;
+  let part2 = part2 dp poi_count distances in
+  Printf.printf "Part 2: %d\n" part2
