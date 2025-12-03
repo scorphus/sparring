@@ -20,8 +20,26 @@ let find_largest_joltage bank =
   in
   aux 0 bank
 
+let rec find_max_in_first n best best_tail = function
+  | [] -> (best, best_tail)
+  | _ when n = 0 -> (best, best_tail)
+  | b :: bank when b > best -> find_max_in_first (n - 1) b bank bank
+  | _ :: bank -> find_max_in_first (n - 1) best best_tail bank
+
+let find_largest_joltage_n bank n =
+  let rec aux remaining acc = function
+    | [] -> acc
+    | _ when remaining = 0 -> acc
+    | bank ->
+        let skip = List.length bank - remaining + 1 in
+        let best, rest = find_max_in_first skip 0 bank bank in
+        aux (remaining - 1) ((acc * 10) + best) rest
+  in
+  aux n 0 bank
+
 let () =
   let banks = read_battery_banks () in
-  let largest_joltages = List.map find_largest_joltage banks in
-  let total_joltage = List.fold_left (fun acc x -> acc + x) 0 largest_joltages in
-  Printf.printf "Part 1: %d\n" total_joltage
+  let p1 = List.fold_left (fun acc b -> acc + find_largest_joltage b) 0 banks in
+  let p2 = List.fold_left (fun acc b -> acc + find_largest_joltage_n b 12) 0 banks in
+  Printf.printf "Part 1: %d\n" p1;
+  Printf.printf "Part 2: %d\n" p2
