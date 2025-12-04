@@ -24,6 +24,12 @@ let count_neighbors rolls (r, c) =
 
 let accessible rolls = CoordSet.filter (fun coord -> count_neighbors rolls coord < 5) rolls
 
+let rec remove_accessible rolls =
+  let to_remove = accessible rolls in
+  if CoordSet.is_empty to_remove then rolls else remove_accessible (CoordSet.diff rolls to_remove)
+
 let () =
   let rolls = read_grid () in
-  Printf.printf "Part 1: %d\n" (CoordSet.cardinal (accessible rolls))
+  Printf.printf "Part 1: %d\n" (CoordSet.cardinal (accessible rolls));
+  let remaining = remove_accessible rolls in
+  Printf.printf "Part 2: %d\n" (CoordSet.cardinal rolls - CoordSet.cardinal remaining)
