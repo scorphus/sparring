@@ -31,6 +31,21 @@ let is_real_room (name, _, checksum) =
 let real_rooms_id_sum rooms =
   rooms |> List.filter is_real_room |> List.map (fun (_, sector_id, _) -> sector_id) |> List.fold_left ( + ) 0
 
+let decrypt_room_name (name, sector_id, _) =
+  let base = Char.code 'a' in
+  String.map (function '-' -> ' ' | c -> Char.chr (base + ((Char.code c - base + sector_id) mod 26))) name
+
+let contains_substring string sub =
+  try
+    Str.search_forward (Str.regexp_string sub) string 0 |> ignore;
+    true
+  with Not_found -> false
+
+let find_north_pole_objects_storage rooms =
+  rooms |> List.filter is_real_room |> List.find (fun room -> contains_substring (decrypt_room_name room) "northpole")
+
 let () =
   let rooms = read_rooms () in
-  Printf.printf "Part 1: %d\n" (real_rooms_id_sum rooms)
+  Printf.printf "Part 1: %d\n" (real_rooms_id_sum rooms);
+  let _, sector_id, _ = find_north_pole_objects_storage rooms in
+  Printf.printf "Part 2: %d\n" sector_id
