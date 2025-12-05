@@ -24,4 +24,5 @@ let () =
   let ranges = read parse_range in
   let ids = read parse_id in
   let merged = merge_ranges ranges in
-  Printf.printf "Part 1: %d\n" (List.filter (fun id -> is_fresh id merged) ids |> List.length)
+  Printf.printf "Part 1: %d\n" (List.filter (fun id -> is_fresh id merged) ids |> List.length);
+  Printf.printf "Part 2: %d\n" (List.fold_left (fun acc (a, b) -> acc + (b - a + 1)) 0 merged)
