@@ -22,9 +22,17 @@ let most_frequent char_freqs =
     ('!', 0) char_freqs
   |> fst
 
+let least_frequent char_freqs =
+  List.fold_left
+    (fun (min_c, min_count) (c, count) -> if count < min_count then (c, count) else (min_c, min_count))
+    ('!', max_int) char_freqs
+  |> fst
+
 let () =
   let messages = read_messages () in
   let transposed = transpose messages in
   let char_freqs = List.map count_chars transposed in
   let part1 = List.map most_frequent char_freqs |> List.to_seq |> String.of_seq in
   Printf.printf "Part 1: %s\n" part1;
+  let part2 = List.map least_frequent char_freqs |> List.to_seq |> String.of_seq in
+  Printf.printf "Part 2: %s\n" part2
