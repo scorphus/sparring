@@ -13,6 +13,11 @@ module UnionFind = struct
     let parent, px = find parent x in
     let parent, py = find parent y in
     if px = py then parent else IntMap.add py px parent
+
+  let union_check parent x y =
+    let parent, px = find parent x in
+    let parent, py = find parent y in
+    if px = py then (parent, false) else (IntMap.add py px parent, true)
 end
 
 let read_lines () =
@@ -35,10 +40,10 @@ let all_pairs points =
   in
   List.sort compare (aux [] indexed)
 
-let take k lst =
+let split_at k lst =
   let rec aux acc k = function
-    | [] -> List.rev acc
-    | x :: xs -> if k = 0 then List.rev acc else aux (x :: acc) (k - 1) xs
+    | [] -> (List.rev acc, [])
+    | x :: xs as rest -> if k = 0 then (List.rev acc, rest) else aux (x :: acc) (k - 1) xs
   in
   aux [] k lst
 
@@ -53,6 +58,18 @@ let group_sizes parent n =
   in
   IntMap.fold (fun _ size acc -> size :: acc) counts [] |> List.sort (fun a b -> b - a)
 
+let find_final_connection points parent n_components remaining =
+  let rec aux parent n_components = function
+    | [] -> failwith "no solution"
+    | (_, i, j) :: rest -> (
+        match UnionFind.union_check parent i j with
+        | parent, true ->
+            if n_components = 2 then List.hd (List.nth points i) * List.hd (List.nth points j)
+            else aux parent (n_components - 1) rest
+        | parent, false -> aux parent n_components rest)
+  in
+  aux parent n_components remaining
+
 let () =
   let n_connections =
     match Sys.argv with
@@ -62,9 +79,10 @@ let () =
   let points = read_lines () |> List.map parse_point in
   let pairs = all_pairs points in
   let n = List.length points in
-  let parent =
-    take n_connections pairs |> List.fold_left (fun parent (_, i, j) -> UnionFind.union parent i j) (UnionFind.create n)
-  in
+  let first_pairs, remaining = split_at n_connections pairs in
+  let parent = List.fold_left (fun parent (_, i, j) -> UnionFind.union parent i j) (UnionFind.create n) first_pairs in
   let sizes = group_sizes parent n in
   let p1 = List.nth sizes 0 * List.nth sizes 1 * List.nth sizes 2 in
-  Printf.printf "Part 1: %d\n" p1
+  Printf.printf "Part 1: %d\n" p1;
+  let p2 = find_final_connection points parent (List.length sizes) remaining in
+  Printf.printf "Part 2: %d\n" p2
