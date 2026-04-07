@@ -1,15 +1,22 @@
 package main
 
 import (
+	"flag"
+	"os"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+	os.Exit(m.Run())
+}
 
 // --- correctness tests ---
 
 func TestWithoutMake(t *testing.T) {
-	s := withoutMake(N)
-	if len(s) != N {
-		t.Errorf("expected len %d, got %d", N, len(s))
+	s := withoutMake(*N)
+	if len(s) != *N {
+		t.Errorf("expected len %d, got %d", *N, len(s))
 	}
 	for i, v := range s {
 		if v != i {
@@ -20,12 +27,12 @@ func TestWithoutMake(t *testing.T) {
 }
 
 func TestWithMake(t *testing.T) {
-	s := withMake(N)
-	if len(s) != N {
-		t.Errorf("expected len %d, got %d", N, len(s))
+	s := withMake(*N)
+	if len(s) != *N {
+		t.Errorf("expected len %d, got %d", *N, len(s))
 	}
-	if cap(s) != N {
-		t.Errorf("expected cap %d, got %d", N, cap(s))
+	if cap(s) != *N {
+		t.Errorf("expected cap %d, got %d", *N, cap(s))
 	}
 	for i, v := range s {
 		if v != i {
@@ -44,7 +51,7 @@ func TestWithMake(t *testing.T) {
 func BenchmarkWithoutMake(b *testing.B) {
 	var s []int
 	for b.Loop() {
-		s = withoutMake(N)
+		s = withoutMake(*N)
 	}
 	_ = s
 }
@@ -52,7 +59,7 @@ func BenchmarkWithoutMake(b *testing.B) {
 func BenchmarkWithMake(b *testing.B) {
 	var s []int
 	for b.Loop() {
-		s = withMake(N)
+		s = withMake(*N)
 	}
 	_ = s
 }

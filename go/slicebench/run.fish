@@ -7,6 +7,9 @@ go test ./...
 # run benchmarks with memory stats, 6 rounds for benchstat
 go test -bench=. -benchmem -count=6 | tee bench.txt
 
+# or with a custom N (slice size)
+# go test -bench=. -benchmem -count=6 -args -n 100 | tee bench.txt
+
 # force a specific GOMAXPROCS
 # GOMAXPROCS=1 go test -bench=. -benchmem -count=6
 
