@@ -1,0 +1,18 @@
+goos: darwin
+goarch: arm64
+pkg: slicebench
+cpu: Apple M5
+BenchmarkWithoutMake-10    	     373	   3149878 ns/op	41678284 B/op	      39 allocs/op
+BenchmarkWithoutMake-10    	     379	   3203593 ns/op	41678284 B/op	      39 allocs/op
+BenchmarkWithoutMake-10    	     364	   3245142 ns/op	41678285 B/op	      39 allocs/op
+BenchmarkWithoutMake-10    	     384	   3163832 ns/op	41678290 B/op	      39 allocs/op
+BenchmarkWithoutMake-10    	     381	   3169076 ns/op	41678288 B/op	      39 allocs/op
+BenchmarkWithoutMake-10    	     362	   3071230 ns/op	41678220 B/op	      39 allocs/op
+BenchmarkWithMake-10       	    3408	    318335 ns/op	 8003589 B/op	       1 allocs/op
+BenchmarkWithMake-10       	    3724	    315726 ns/op	 8003587 B/op	       1 allocs/op
+BenchmarkWithMake-10       	    3692	    318142 ns/op	 8003587 B/op	       1 allocs/op
+BenchmarkWithMake-10       	    3669	    317508 ns/op	 8003588 B/op	       1 allocs/op
+BenchmarkWithMake-10       	    3621	    315942 ns/op	 8003587 B/op	       1 allocs/op
+BenchmarkWithMake-10       	    3730	    317021 ns/op	 8003587 B/op	       1 allocs/op
+PASS
+ok  	slicebench	14.334s
